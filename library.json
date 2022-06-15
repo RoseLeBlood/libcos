@@ -1,0 +1,22 @@
+{
+    "name": "libcos",
+    "version": "0.1.0",
+    "description": "A vey simple c kernel libary ",
+    "keywords": "native, osdev, libc",
+    "repository":
+    {
+      "type": "git",
+      "url": "https://github.com/RoseLeBlood/libcos.git"
+    },
+    "authors":
+    [
+      {
+        "name": "Amber-Sophia Schröck",
+        "email": "ambersophia.schroeck@outlook.de"
+      }
+    ],
+    "license": "MIT",
+    "homepage": "https://github.com/RoseLeBlood/libcos",
+    "frameworks": "*",
+    "platforms": "*"
+  }
