@@ -1,11 +1,10 @@
 
 #include "libcos/types.h"
-
-extern void port_delay(int usec);
+#include "libcos/private/port.h"
 
 void udelay(uint32_t usec)
 {
-	port_delay(usec);
+	port_iodelay(usec);
 }
 void mdelay (unsigned msec)
 {
