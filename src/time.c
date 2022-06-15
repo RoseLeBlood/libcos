@@ -5,8 +5,6 @@
 
 #define BCD2BIN(bcd) ((((bcd)&15) + ((bcd)>>4)*10))
 
-extern uint8_t port_time_read(uint8_t addr);
-
 struct tm *localtime(const time_t *timer)
 {
 	static struct tm time;

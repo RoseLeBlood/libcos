@@ -555,9 +555,10 @@ wint_t towctrans(wint_t wc, wctrans_t trans)
         if (trans == (wctrans_t)2) return towlower(wc);
         return wc;
 }
-int iswctype(wint_t wc, wctype_t type)
-{
-        switch ((int)type) {
+int iswctype(wint_t wc, wctype_t type) {
+        int _type_int = (int)type;
+
+        switch (_type_int) {
         case WCTYPE_ALNUM:
                 return iswalnum(wc);
         case WCTYPE_ALPHA:
