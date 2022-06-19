@@ -4,35 +4,36 @@ TCC=/opt/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi-gcc
 TAS=/opt/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi-as
 TAR=/opt/arm-bcm2708-linux-gnueabi/bin/arm-bcm2708-linux-gnueabi-ar
 
-KLIBC = \
-	src/malloc.o \
-	src/string.o \
-	src/stdio.o \
-    src/time.o \
-    src/typeconv.o \
-    src/assert.o \
-    src/math_exp.o \
-    src/math_misc.o \
-    src/math_pow.o \
-    src/math_trigo.o \
-    src/ctype.o \
-    src/errno.o \
-    src/stdlib.o \
-    src/sys/utsname.o \
-    src/libgcc.o \
-    src/memclr.o \
-    src/getopt.o \
-    src/getopt_long.o \
-    src/wchar.o\
-    src/wctype.o \
-    src/sleep.o \
-    src/sqrtf.o \
-    src/sprintf.o \
-	src/assert.o \
-	src/libgcc.o
+PORT = src/libcos/port/port.o 
 
-HASH  = src/hash/adler32.o \
- 		src/hash/crc.o
+KLIBC = \
+	src/libcos/malloc.o \
+	src/libcos/string.o \
+	src/libcos/stdio.o \
+    src/libcos/time.o \
+    src/libcos/typeconv.o \
+    src/assert.o \
+    src/libcos/math_exp.o \
+    src/libcos/math_misc.o \
+    src/libcos/math_pow.o \
+    src/libcos/math_trigo.o \
+    src/libcos/ctype.o \
+    src/libcos/errno.o \
+    src/libcos/stdlib.o \
+    src/libcos/sys/utsname.o \
+    src/libcos/memclr.o \
+    src/libcos/getopt.o \
+    src/libcos/getopt_long.o \
+    src/libcos/wchar.o\
+    src/libcos/wctype.o \
+    src/libcos/sleep.o \
+    src/libcos/sqrtf.o \
+    src/libcos/sprintf.o \
+	src/libcos/libgcc.o \
+    src/libcos/atomic_spinlock.o 
+
+HASH  = src/libcos/hash/adler32.o \
+ 		src/libcos/hash/crc.o
 
 PROMPT = " -> "
 CD = @echo  $(PROMPT) CD "        " && cd
@@ -42,7 +43,7 @@ AR = @echo "   " $(PROMPT) AR "   " $< && $(TAR)
 RM = @echo "   " $(PROMPT) REM "   " $< && rm
 CP = @echo "   " $(PROMPT)  CP && cp
 
-SOURCES=$(KLIBC) $(HASH)
+SOURCES=$(KLIBC) $(HASH) $(PORT)
 
 all: $(SOURCES) static
 .s.o:
