@@ -22,7 +22,7 @@ static __inline__ void* _align_alloc (size_t size, size_t align)
 	return _maligned;
 }
 
-static __inline__ void _mm_free (void * aligned) {
+static __inline__ void _align_free (void * aligned) {
   if (aligned) free (((void **) aligned) [-1]);
 }
 
