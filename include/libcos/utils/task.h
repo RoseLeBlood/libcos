@@ -47,7 +47,7 @@ int     xTaskTerminate(task_t* task);
 
 /// \brief Get the current handle
 /// \return The current handle (process id)
-int     xTaskGetCurrentHandle();
+int     ixTaskGetCurrentHandle();
 /// \brief Get current task
 /// \return The current task
 
@@ -55,6 +55,10 @@ task_t* xTaskGetCurrent();
 /// \brief Is the given task the current task
 /// \return if 0 then yes and 1 when not
 int     bxTaskIsCurrent(task_t* task);
+
+
+void* pxTaskGetRegs(task_t* task);
+void* pxTaskGetCurentRegs();
 
 #ifdef  __cplusplus
 }

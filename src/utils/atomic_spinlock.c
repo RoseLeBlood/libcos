@@ -1,4 +1,4 @@
-#include "libcos/atomic_spinlock.h"
+#include "libcos/utils/atomic_spinlock.h"
 #include "libcos/malloc.h"
 #include "assert.h"
 

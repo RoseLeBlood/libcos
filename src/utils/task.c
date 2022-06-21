@@ -1,5 +1,5 @@
 #include "libcos/private/port.h"
-#include "libcos/task.h"
+#include "libcos/utils/task.h"
 #include "libcos/malloc.h"
 #include "libcos/string.h"
 
@@ -66,14 +66,14 @@ int xTaskTerminate(task_t* task) {
     return port_terminate_process(task->handle);
 }
 
-int  xTaskGetCurrentHandle() {
+int  ixTaskGetCurrentHandle() {
     return port_get_process_id();
 }
 task_t* xTaskGetCurrent() {
     task_t* _Task = malloc(sizeof(task_t));
     assert(_Task != NULL);
 
-    _Task->handle = xTaskGetCurrentHandle();
+    _Task->handle = ixTaskGetCurrentHandle();
     _Task->userdata = NULL;
     _Task->mainFunc = 0;
 
@@ -82,6 +82,15 @@ task_t* xTaskGetCurrent() {
 
 int bxTaskIsCurrent(task_t* task) {
     return (task->handle == port_get_process_id()) ? 0 : 1;
+}
+
+void* pxTaskGetRegs(task_t* task) {
+    return port_get_process_regs(task->handle);
+}
+
+void* pxTaskGetCurentRegs() {
+    int _handle = ixTaskGetCurrentHandle();
+    return port_get_process_regs(_handle);
 }
 
 void __process_main_func(void* taskData) {
@@ -95,3 +104,4 @@ void __process_main_func(void* taskData) {
     port_set_process_state(_this->handle, TASK_STATE_TERMINATED);
     port_terminate_process(_this->handle);
 }
+
