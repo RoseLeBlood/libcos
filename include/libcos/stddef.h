@@ -41,7 +41,7 @@ typedef int wchar_t;
 #define BIT(n) (1<<(n))
 #define IS_BIT_SET(value, pos) ((value)&BIT(pos))
 
-#define SAFE_DELETE(c)	if(c != NULL) { delete c; c = NULL; }
+#define SAFE_DELETE(c)	if(c != NULL) { free(c); c = NULL; }
 
 
 
