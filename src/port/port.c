@@ -9,14 +9,19 @@ void port_free(void* addr) {
 
 }
 
-
-
 uint8_t port_time_read(port_time_sec_t addr) {
         return 0;
 }
 
 void port_putchar(const char c) {
 
+}
+
+int create_process() {
+     return 1;
+}
+int get_pid(int pid) {
+     return 1;
 }
 
 
@@ -93,7 +98,7 @@ void 			port_io_wait( void )  {
 }
 
 void 			port_iodelay(int count)  { 
-    unsigned nloops = (usec * (SYS_CLK_KHZ / 1000) + 7) >> 3;
+    unsigned nloops = (count * (SYS_CLK_KHZ / 1000) + 7) >> 3;
 
     do {
             asm volatile ("nop");
