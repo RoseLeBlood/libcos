@@ -92,10 +92,7 @@ void 			port_io_wait( void )  {
 
 }
 
-void 			port_iodelay(int count)  {
-      /*
-    
-    Raspberry PI example: 
+void 			port_iodelay(int count)  { 
     unsigned nloops = (usec * (SYS_CLK_KHZ / 1000) + 7) >> 3;
 
     do {
@@ -103,7 +100,7 @@ void 			port_iodelay(int count)  {
             asm volatile ("nop");
             asm volatile ("nop");
             asm volatile ("nop");
-    } while (--nloops);*/
+    } while (--nloops);
 }
 
 

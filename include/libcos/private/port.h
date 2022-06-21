@@ -3,6 +3,20 @@
 
 #include "libcos/types.h"
 
+#define PRINT_BUF_LEN 12
+
+#define SYS_CLK_MHZ    (3000)
+#define SYS_CLK_KHZ    (SYS_CLK_MHZ * 1000)
+#define SYS_CLK_HZ     (SYS_CLK_KHZ * 1000)
+
+#ifndef __CHAR_BIT__
+# define __CHAR_BIT__                   8
+#endif
+
+#ifndef __SIZEOF_SHORT__
+# define __SIZEOF_SHORT__               sizeof(short)
+#endif
+
 #ifndef PORT_SYS_NAME
 #define PORT_SYS_NAME           "native"
 #endif
@@ -31,7 +45,7 @@
 extern "C" {
 #endif
 
-#define PRINT_BUF_LEN 12
+
 
 typedef enum PORTTIMESEC {
     TIME_READ_ADDR_SEC = 0x00,
