@@ -73,7 +73,9 @@ int             port_get_process_state(int pid);
 void            port_set_process_state(int pid, uint8_t state);
 int             port_get_process_id();
 int             port_terminate_process(int pid);
+void*           port_get_process_regs(int pid);
 
+void            port_shedular_task_switch(void* pOldRegs, void* pNewRegs);
 
 // for iob.h
 

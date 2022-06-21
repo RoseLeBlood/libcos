@@ -33,10 +33,19 @@ void port_set_process_state(int pid, uint8_t state) {
 int port_get_process_id() {
      return 1;
 }
+
 int port_terminate_process(int pid) {
+     return 0;
+} 
+
+void* port_get_process_regs(int pid) {
      return 0;
 }
 
+
+void  port_shedular_task_switch(void* pOldRegs, void* pNewRegs) {
+
+}
 
 // ---------------- IO
 void 			port_outb( unsigned short port, unsigned char val )  {
