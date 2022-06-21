@@ -30,7 +30,8 @@ KLIBC = \
     src/libcos/sqrtf.o \
     src/libcos/sprintf.o \
 	src/libcos/libgcc.o \
-    src/libcos/atomic_spinlock.o 
+    src/libcos/utils/atomic_spinlock.o \
+    src/libcos/utils/task.o
 
 HASH  = src/libcos/hash/adler32.o \
  		src/libcos/hash/crc.o

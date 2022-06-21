@@ -1,7 +1,7 @@
 #ifndef STDC_ATOMIC_LOCK_H
 #define STDC_ATOMIC_LOCK_H
 
-#include <atomic.h>
+#include <stdatomic.h>
 
 #ifdef  __cplusplus
 extern "C" {
