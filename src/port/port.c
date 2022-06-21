@@ -17,11 +17,24 @@ void port_putchar(const char c) {
 
 }
 
-int create_process() {
+int port_create_process(void (*main)(void*), const char* name, uint32_t stackSize) {
      return 1;
 }
-int get_pid(int pid) {
+int port_start_process(int pid, void* userdata) {
+
+}
+int port_get_process_state(int pid) {
      return 1;
+}
+void port_set_process_state(int pid, uint8_t state) {
+    
+}
+
+int port_get_process_id() {
+     return 1;
+}
+int port_terminate_process(int pid) {
+     return 0;
 }
 
 
