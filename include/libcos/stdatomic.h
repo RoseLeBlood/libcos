@@ -66,9 +66,7 @@ extern "C" {
 
 #define	ATOMIC_FLAG_INIT		{ ATOMIC_VAR_INIT(0) }
 
-typedef struct {
-	atomic_bool	flag;
-} atomic_flag;
+
 
 typedef enum {
 	memory_order_relaxed = __ATOMIC_RELAXED,
@@ -115,6 +113,10 @@ typedef _Atomic(size_t)			    atomic_size_t;
 typedef _Atomic(ptrdiff_t)		    atomic_ptrdiff_t;
 
 typedef volatile int32_t* 			atomic_t;
+
+typedef struct {
+	atomic_bool	flag;
+} atomic_flag;
 
 // MOM = memory_order_modifier
 #define ATOMIC_MOM_MASK             0x0ffff
