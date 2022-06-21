@@ -16,19 +16,25 @@ atomic_spinlock_t*  pAtomicSpinLockCreate() {
 }
 
 int xAtomicSpinlockTake(atomic_spinlock_t* lock) {
-    while(! atomic_compare_and_exchange(&lock->locked, 0, 1, true,  __ATOMIC_ACQUIRE) ) 
+    assert(lock != NULL);
+
+    while(! atomic_compare_exchange_t(&lock->locked, 0, 1,  __ATOMIC_ACQUIRE) ) 
     { }
 
     return xATOMIC_LOCKED;
 }
 
 int xAtomicSpinlockGive(atomic_spinlock_t* lock) {
+    assert(lock != NULL);
+
     atomic_store(&lock->locked, 0, __ATOMIC_RELEASE);
     return xATOMIC_LOCKED;
 }
 
 int xAtomicSpinlockTryLock(atomic_spinlock_t* lock) {
-    if(atomic_compare_and_exchange(&lock->locked, 0, 1, true,  __ATOMIC_ACQUIRE))
+    assert(lock != NULL);
+
+    if(atomic_compare_exchange_t(&lock->locked, 0, 1,  __ATOMIC_ACQUIRE))
         return xATOMIC_ERROR;
     else 
         xAtomicSpinlockTake(lock);
@@ -37,6 +43,18 @@ int xAtomicSpinlockTryLock(atomic_spinlock_t* lock) {
 }
 
 int xAtomicSpinlockIsLoked(atomic_spinlock_t*  lock) {
+    assert(lock != NULL);
+
     return __atomic_load_n(&lock->locked, __ATOMIC_SEQ_CST) == 1 ? 
         xATOMIC_LOCKED : xATOMIC_UNLOCKED;
+}
+
+int xAtomicSpinlockDestroy(atomic_spinlock_t*  lock) {
+    assert(lock != NULL);
+
+    if(xAtomicSpinlockIsLoked(lock) == xATOMIC_LOCKED) return xATOMIC_ERROR;
+
+    free(lock); lock = NULL;
+
+    return 0;
 }
