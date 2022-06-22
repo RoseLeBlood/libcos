@@ -3,13 +3,14 @@
 
 static unsigned long _rand_value = 1;
 
-double                          atof            (const char* nptr);
+double atof (const char* nptr) {
+        return (strtod(ascii, NULL));
+}
 
 
 
 
-int atoi(const char* str) 
-{
+int atoi(const char* str) {
         int result = 0;
         while (isspace(*str))
                 str++;
@@ -18,8 +19,7 @@ int atoi(const char* str)
         return result;
 }
 
-long int atol(const char* str) 
-{
+long int atol(const char* str) {
         long int result = 0;
         while (isspace(*str))
                 str++;
@@ -28,8 +28,7 @@ long int atol(const char* str)
         return result;
 }
 
-long long int atoll(const char* str) 
-{
+long long int atoll(const char* str) {
         long long int result = 0;
         while (isspace(*str))
                 str++;
@@ -39,53 +38,47 @@ long long int atoll(const char* str)
 }
 
 double                          strtod  (const char* nptr, char** endptr);
-float                                   strtof          (const char* nptr, char** endptr);
+float                            strtof          (const char* nptr, char** endptr);
 long double                     strtold (const char* nptr, char** endptr);
-long int                                strtol          (const char* nptr, char** endptr, int base);
+long int                        strtol          (const char* nptr, char** endptr, int base);
 long long int                   strtoll (const char* nptr, char** endptr, int base);
 unsigned long int               strtoul (const char* nptr, char** endptr, int base);
-unsigned long long int  strtoull        (const char* nptr, char** endptr, int base);
+unsigned long long int          strtoull        (const char* nptr, char** endptr, int base);
 
 
 
 
 
 void*                           bsearch (const void* key, const void* base, size_t nmemb, size_t size, int (*compar)(const void*, const void*));
-void                                    qsort           (void* base, size_t nmemb, size_t size, int (*compar)(const void*, const void*));
+void                            qsort           (void* base, size_t nmemb, size_t size, int (*compar)(const void*, const void*));
 
-int abs(int j) 
-{
+int abs(int j) {
         return (j < 0) ? (-j) : j;
 }
 
-long int labs(long int j) 
-{
+long int labs(long int j) {
         return (j < 0) ? (-j) : j;
 }
 
-long long int llabs(long long int j) 
-{
+long long int llabs(long long int j) {
         return (j < 0) ? (-j) : j;
 }
 
-div_t div(int numer, int denom) 
-{
+div_t div(int numer, int denom) {
         div_t result;
         result.quot = numer / denom;
         result.rem = numer % denom;
         return result;
 }
 
-ldiv_t ldiv(long int numer, long int denom) 
-{
+ldiv_t ldiv(long int numer, long int denom)  {
         ldiv_t result;
         result.quot = numer / denom;
         result.rem = numer % denom;
         return result;
 }
 
-lldiv_t lldiv(long long int numer, long long int denom) 
-{
+lldiv_t lldiv(long long int numer, long long int denom) {
         lldiv_t result;
         return result;
 }
@@ -130,12 +123,11 @@ size_t  wcstombs(register char *s, register const wchar_t *pwcs, size_t n)
 	  }
 	  return n - i - 1;
 }
-void srand(unsigned int seed) 
-{
+void srand(unsigned int seed) {
       _rand_value = seed;
 }
-int rand() 
-{
+
+int rand() {
 	unsigned int next = _rand_value;
   	int result;
 
@@ -158,8 +150,7 @@ int rand()
 
    	return result;
 }
-int rand_m(uint32_t min, uint32_t max)
-{
-   	int random = rand() % (max-min) + min;
-    return random;
+int rand_m(uint32_t min, uint32_t max) {
+        int random = rand() % (max-min) + min;
+        return random;
 }
