@@ -1,14 +1,24 @@
-#ifndef __STDC_STDBOOL_H_
-#define __STDC_STDBOOL_H_
+#ifndef KLIBCOS_STDBOOL_H_
+#define KLIBCOS_STDBOOL_H_
 
-#ifndef _Bool
-#define _Bool   char
+#ifndef __cplusplus
+    #ifndef _Bool
+        #define _Bool   char
+    #endif
+
+    #define bool _Bool
+
+    #if defined __STDC_VERSION__ && __STDC_VERSION__ > 201710L
+        #define true	((_Bool)+1u)
+        #define false	((_Bool)+0u)
+    #else
+        #define true	1
+        #define false	0
+    #endif
+#else
+    #define _Bool	bool
 #endif
-
-#define bool                                    _Bool
-#define true                                    1
-#define false                                   0
-#define __bool_true_false_are_defined   1
-
+    
+#define __bool_true_false_are_defined           1
 
 #endif
