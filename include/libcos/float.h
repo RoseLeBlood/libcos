@@ -62,7 +62,9 @@ extern "C" {
 #define FLT_SNAN	(__builtin_nansf (""))
 #define DBL_SNAN	(__builtin_nans (""))
 #define LDBL_SNAN	(__builtin_nansl (""))
-#define FLT16_SNAN	(__builtin_nansf16 (""))
+
+
+
 
 
 
