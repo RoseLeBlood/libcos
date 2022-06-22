@@ -38,7 +38,7 @@ long long int atoll(const char* str) {
 }
 
 double                          strtod  (const char* nptr, char** endptr);
-float                            strtof          (const char* nptr, char** endptr);
+float                           strtof          (const char* nptr, char** endptr);
 long double                     strtold (const char* nptr, char** endptr);
 long int                        strtol          (const char* nptr, char** endptr, int base);
 long long int                   strtoll (const char* nptr, char** endptr, int base);
