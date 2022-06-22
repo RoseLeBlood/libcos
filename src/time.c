@@ -19,8 +19,7 @@ struct tm *localtime(const time_t *timer)
     return &time;
 }
 //=======================================================================
-char* asctime(const struct tm *timeptr)
-{
+char* asctime_r(const struct tm* restrict timeptr, char* restrict buf) {
 	static const char wday_name[][4] = 
 	{
     	"Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"
@@ -30,12 +29,18 @@ char* asctime(const struct tm *timeptr)
     	"Dec", "Jan", "Feb", "Mar", "Apr", "May", "Jun",
     	"Jul", "Aug", "Sep", "Oct", "Nov"
   	};
-  	static char result[20] = { 0 };
-  	sprintf(result, "%s %s %d %d:%d:%d %d",
+  	//static char result[20] = { 0 };
+  	sprintf(buf, "%s %s %d %d:%d:%d %d",
     	wday_name[timeptr->tm_mday + 1],
     	mon_name[timeptr->tm_mon],
     	timeptr->tm_mday, timeptr->tm_hour,
     	timeptr->tm_min, timeptr->tm_sec,
     	2000 + timeptr->tm_year);
-  	return result;
+  	return buf;
 }
+
+char* asctime(const struct tm *timeptr) {
+	static char buf[26];
+	return asctime_r(timeptr, buf);
+}
+

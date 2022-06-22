@@ -1,5 +1,5 @@
-#ifndef _FLOAT_H
-#define	_FLOAT_H
+#ifndef KLIBCOS_FLOAT_H
+#define	KLIBCOS_FLOAT_H
 
 #ifdef	__cplusplus
 extern "C" {

@@ -9,14 +9,21 @@ extern "C"
 #endif
 
 #define PI					(3.1415926535897932384626433832795f)
-#define  SSE_XMM_SIZE  		128/8
+#define SSE_XMM_SIZE  		128/8
 	
-#define                 fpclassify(x)                   		__builtin_fpclassify(x)
-#define                 isfinite(x)                             __builtin_isfinite(x)
-#define                 isinf(x)                                __builtin_isinf(x)
-#define                 isnan(x)                                __builtin_isnan(x)
-#define                 isnormal(x)                             __builtin_isnormal(x)
-#define                 signbit(x)                              (isnan(x) ? 0 : ((x) < 0))
+#define                 isgreater(x,y)                  __builtin_isgreater(x,y)
+#define                 isgreaterequal(x,y)             __builtin_isgreaterequal(x,y)
+#define                 isless(x,y)                     __builtin_isless(x,y)
+#define                 islessequal(x,y)                __builtin_islessequal(x,y)
+#define                 islessgreater(x,y)              __builtin_islessgreater(x,y)
+#define                 isunordered(x,y)                __builtin_isunordered(x,y)
+
+#define                 fpclassify(x)                   __builtin_fpclassify(x)
+#define                 isfinite(x)                     __builtin_isfinite(x)
+#define                 isinf(x)                        __builtin_isinf(x)
+#define                 isnan(x)                        __builtin_isnan(x)
+#define                 isnormal(x)                     __builtin_isnormal(x)
+#define                 signbit(x)                      (__builtin_isnan(x) ? 0 : ((x) < 0))
 
 double                  acos(double x);
 float                   acosf(float x);
@@ -196,12 +203,6 @@ void paddw(uint16_t DST[8], const uint16_t v2[8]);
 void paddd(uint32_t DST[4], const uint32_t v2[4]);
 void paddq(uint64_t DST[2], const uint64_t v2[2]);
 
-#define                 isgreater(x,y)                  __builtin_isgreater(x,y)
-#define                 isgreaterequal(x,y)             __builtin_isgreaterequal(x,y)
-#define                 isless(x,y)                             __builtin_isless(x,y)
-#define                 islessequal(x,y)                        __builtin_islessequal(x,y)
-#define                 islessgreater(x,y)                      __builtin_islessgreater(x,y)
-#define                 isunordered(x,y)                        __builtin_isunordered(x,y)
 
 #ifdef __cplusplus
 };
