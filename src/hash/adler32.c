@@ -36,7 +36,6 @@ uint32_t adler32 (uint32_t initial,const char* data, size_t length)
 {
 	if (data == NULL)
 		return -1;
-	size_t l = memlen(uint8_t, data);
-
+	
 	return adler32ex(initial, data, 0, length);
 }
