@@ -15,7 +15,7 @@ typedef struct  { int quot; int rem; }                          div_t;
 typedef struct  { long quot; long rem; }                        ldiv_t;
 typedef struct  { long long quot; long long rem; }      lldiv_t;
 
-double                          atof            (const char* nptr);
+double                                  atof            (const char* nptr);
 int                                     atoi            (const char* nptr);
 
 long int                                atol            (const char* nptr);
