@@ -7,7 +7,7 @@
 #define	__BIG_ENDIAN	4321
 #define	__PDP_ENDIAN	3412
 
-#ifdef __ARMEB__
+#ifdef __ARMEB__ | defined __ARM__
 #define	__BYTE_ORDER	__BIG_ENDIAN
 #else
 #define	__BYTE_ORDER	__LITTLE_ENDIAN
@@ -21,7 +21,7 @@
     #define	__bswap16(_x)	__builtin_bswap16(_x)
     #define	__bswap32(_x)	__builtin_bswap32(_x)
     #define	__bswap64(_x)	__builtin_bswap64(_x)
-#else /* __GNUC__ */
+#else 
     static inline uint16_t __bswap16(uint16_t _x) {
 	    return ((uint16_t)((_x >> 8) | ((_x << 8) & 0xff00)));
     }
