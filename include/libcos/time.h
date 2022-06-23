@@ -1,18 +1,16 @@
 #ifndef KLIBC_TIME_H
 #define KLIBC_TIME_H
 
+#include <types.h>
+
 #define CLOCKS_PER_SEC 1000000L
 #define TIME_UTC 1
 
 #ifdef __cplusplus
-extern "C"
-{
+extern "C" {
 #endif
 
-#if defined(_BSD_SOURCE) || defined(_GNU_SOURCE)
-#define __tm_gmtoff tm_gmtoff
-#define __tm_zone tm_zone
-#endif
+
 
 #define _STRUCT_TIMESPEC
 struct timespec {
@@ -26,10 +24,6 @@ struct timeval {
 	suseconds_t tv_usec;
 };
 
-typedef long int        clock_t;
-typedef long int        time_t;
-typedef unsigned long   clock_t;
-typedef unsigned int    useconds_t;
 
 struct tm
 {

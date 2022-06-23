@@ -17,17 +17,23 @@ extern "C" {
 #define HIGHWORD(d) (WORD)(((d) >> 16) & 0xFFFF) //Das oberer WORD eines DWORDs
 #define  LOWWORD(d) (WORD)((d) & 0xFFFF)        //Das untere WORD eines DWORDs
   
-typedef unsigned int ino_t;
-typedef unsigned int dev_t;
-typedef unsigned int uid_t;
-typedef unsigned int gid_t;
-typedef unsigned int off_t;
+typedef unsigned int        ino_t;
+typedef unsigned int        dev_t;
+typedef unsigned int        uid_t;
+typedef unsigned int        gid_t;
+typedef unsigned int        off_t;
 
 typedef int                 nl_item;
 typedef void*               nl_catd;
 
 typedef unsigned int        mode_t;
 typedef int                 ssize_t;
+
+typedef int		            suseconds_t;
+typedef long int            clock_t;
+typedef long int            time_t;
+typedef unsigned int        useconds_t;
+
 
 
 typedef unsigned long       DWORD;
