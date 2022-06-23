@@ -74,7 +74,7 @@ char* nl_langinfo(nl_item item) {
 	/* _NL_LOCALE_NAME extension */
 	if(idx == 65535 && cat < LC_ALL)
 	{
-		assert(0/);
+		assert(0);
 	}
 
 	switch(cat) {
