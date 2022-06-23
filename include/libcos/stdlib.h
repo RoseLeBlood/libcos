@@ -9,11 +9,11 @@ extern "C" {
 
 #include <stddef.h>
 
-
+typedef int (*compar_t)(void* args, const void*, const void*);
 
 typedef struct  { int quot; int rem; }                          div_t;
 typedef struct  { long quot; long rem; }                        ldiv_t;
-typedef struct  { long long quot; long long rem; }      lldiv_t;
+typedef struct  { long long quot; long long rem; }              lldiv_t;
 
 double                                  atof            (const char* nptr);
 int                                     atoi            (const char* nptr);
@@ -32,19 +32,22 @@ void                                    srand           (unsigned int seed);
 int										rand_m(unsigned int min, unsigned int max);
 
 
-void*                           bsearch (const void* key, const void* base, size_t nmemb, size_t size, int (*compar)(const void*, const void*));
-void                                    qsort           (void* base, size_t nmemb, size_t size, int (*compar)(const void*, const void*));
+void*                           bsearch (const void* key, const void* base, size_t nmemb, size_t size, compar_t compar);
+
+void                                    qsort           (void* base, size_t nmemb, size_t size, compar_t compar, void* args);
+void                                    qsort_r         (void* base, size_t nmemb, size_t size, compar_t compar);
+
 int                                     abs             (int j);
 long int                                labs            (long int j);
 long long int                   llabs           (long long int j);
 div_t                                   div             (int numer, int denom);
 ldiv_t                                  ldiv            (long int numer, long int denom);
-lldiv_t                         lldiv   		(long long int numer, long long int denom);
-int                             mblen   		(const char* s, size_t n);
-int                             mbtowc  		(wchar_t* pwc, const char* s, size_t n);
-int                             wctomb  		(char* s, wchar_t wc);
-size_t 							mbstowcs		(register wchar_t *pwcs, register const char *s, size_t n);
-size_t  						wcstombs		(register char *s, register const wchar_t *pwcs, size_t n);
+lldiv_t                                 lldiv   		(long long int numer, long long int denom);
+int                                     mblen   		(const char* s, size_t n);
+int                                     mbtowc  		(wchar_t* pwc, const char* s, size_t n);
+int                                     wctomb  		(char* s, wchar_t wc);
+size_t 							        mbstowcs		(register wchar_t *pwcs, register const char *s, size_t n);
+size_t  						        wcstombs		(register char *s, register const wchar_t *pwcs, size_t n);
 
 
 #ifdef __cplusplus

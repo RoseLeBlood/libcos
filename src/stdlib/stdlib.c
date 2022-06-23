@@ -4,11 +4,8 @@
 static unsigned long _rand_value = 1;
 
 double atof (const char* nptr) {
-        return (strtod(ascii, NULL));
+        return (strtod(nptr, NULL));
 }
-
-
-
 
 int atoi(const char* str) {
         int result = 0;
@@ -49,8 +46,10 @@ unsigned long long int          strtoull        (const char* nptr, char** endptr
 
 
 
-void*                           bsearch (const void* key, const void* base, size_t nmemb, size_t size, int (*compar)(const void*, const void*));
-void                            qsort           (void* base, size_t nmemb, size_t size, int (*compar)(const void*, const void*));
+
+void*                           bsearch (const void* key, const void* base, size_t nmemb, size_t size, compar_t compar);
+
+
 
 int abs(int j) {
         return (j < 0) ? (-j) : j;
@@ -79,8 +78,16 @@ ldiv_t ldiv(long int numer, long int denom)  {
 }
 
 lldiv_t lldiv(long long int numer, long long int denom) {
-        lldiv_t result;
-        return result;
+        lldiv_t retval;
+
+	retval.quot = numer / denom;
+	retval.rem = numer % denom;
+
+	if(numer >= 0 && retval.rem < 0) {
+		retval.quot++;
+		retval.rem -= denom;
+	}
+	return retval;
 }
 
 int mblen(const char *s, size_t n)
@@ -118,8 +125,7 @@ size_t  wcstombs(register char *s, register const wchar_t *pwcs, size_t n)
 	  register int i = n;
 
 	  while (--i >= 0) {
-	          if (!(*s++ = *pwcs++))
-	                  break;
+	        if (!(*s++ = *pwcs++)) break;
 	  }
 	  return n - i - 1;
 }
