@@ -9,6 +9,13 @@
 #define MB_LEN_MAX 1
 #endif
 
+#ifndef __LLONG_MAX__
+#define __LLONG_MAX__       9223372036854775807
+#endif
+
+#ifndef __LLONG_MIN__
+#define __LLONG_MIN__       -9223372036854775807
+#endif
 
 #define SCHAR_MIN               (-__SCHAR_MAX__ - 1)
 #define SCHAR_MAX               __SCHAR_MAX__
@@ -26,7 +33,7 @@
 #define LONG_MAX                __LONG_MAX__
 #define ULONG_MAX               ((1 << (CHAR_BIT * __SIZEOF_LONG__)) - 1)
 
-#define LLONG_MIN               (-__LLONG_MAX__ - 1)
+#define LLONG_MIN               __LLONG_MIN__
 #define LLONG_MAX               __LLONG_MAX__
 #define ULLONG_MAX              ((1 << (CHAR_BIT * __SIZEOF_LONG_LONG__)) - 1)
 

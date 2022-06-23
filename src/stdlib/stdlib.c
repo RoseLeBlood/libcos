@@ -9,8 +9,16 @@ double atof (const char* nptr) {
 
 int atoi(const char* str) {
         int result = 0;
+		bool neg = false;
+
         while (isspace(*str))
                 str++;
+
+        switch(*str) {
+	        case '-':  neg = true; break;
+		case '+': str++; break;
+	}
+
         while (isdigit(*str))
                 result = (result * 10) + (*(str++) - '0');
         return result;
@@ -18,38 +26,41 @@ int atoi(const char* str) {
 
 long int atol(const char* str) {
         long int result = 0;
+        bool neg = false;
+
         while (isspace(*str))
                 str++;
+        switch(*str) {
+	        case '-':  neg = true; break;
+		case '+': str++; break;
+	}
         while (isdigit(*str))
                 result = (result * 10) + (*(str++) - '0');
-        return result;
+        return neg ? -result : result; 
 }
 
 long long int atoll(const char* str) {
-        long long int result = 0;
-        while (isspace(*str))
+        long long result = 0;
+	bool neg = false;
+
+        while(isspace(*str)) 
                 str++;
-        while (isdigit(*str))
+	
+        switch(*str) {
+	        case '-':  neg = true; break;
+		case '+': str++; break;
+	}  
+        while(isdigit(*str)) 
                 result = (result * 10) + (*(str++) - '0');
-        return result;
+        return neg ? -result : result;                         
 }
 
 double                          strtod  (const char* nptr, char** endptr);
 float                           strtof          (const char* nptr, char** endptr);
-long double                     strtold (const char* nptr, char** endptr);
-long int                        strtol          (const char* nptr, char** endptr, int base);
-long long int                   strtoll (const char* nptr, char** endptr, int base);
-unsigned long int               strtoul (const char* nptr, char** endptr, int base);
-unsigned long long int          strtoull        (const char* nptr, char** endptr, int base);
 
-
-
-
-
-
-void*                           bsearch (const void* key, const void* base, size_t nmemb, size_t size, compar_t compar);
-
-
+long double strtold (const char* nptr, char** endptr) {
+        return (long double)strtod(nptr, endptr);
+}
 
 int abs(int j) {
         return (j < 0) ? (-j) : j;
