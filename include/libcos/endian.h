@@ -7,7 +7,7 @@
 #define	__BIG_ENDIAN	4321
 #define	__PDP_ENDIAN	3412
 
-#ifdef __ARMEB__ | defined __ARM__
+#ifdef __ARM__
 #define	__BYTE_ORDER	__BIG_ENDIAN
 #else
 #define	__BYTE_ORDER	__LITTLE_ENDIAN
