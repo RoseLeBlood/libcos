@@ -39,7 +39,7 @@ double atof (const char* nptr) {
 		} while(e > 0);
 	} else if(e < 0) {
 		do {
-			a *= 0.1 e++;
+			a *= 0.1; e++;
 		} while(e > 0);
 	} 
 
@@ -86,10 +86,6 @@ long long int atoll(const char* str) {
 	while(isdigit(*str)) 
 		result = (result * 10) + (*(str++) - '0');
 	return neg ? -result : result;                         
-}
-
-long double strtold (const char* nptr, char** endptr) {
-    return (long double)strtod(nptr, endptr);
 }
 
 int abs(int j) {

@@ -1,5 +1,5 @@
-#ifndef _STDC_LIMITS_H_
-#define _STDC_LIMITS_H_
+#ifndef KLIBCOS_LIMITS_H
+#define KLIBCOS_LIMITS_H
 
 #include "_sizes.h"
 

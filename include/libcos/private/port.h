@@ -1,8 +1,6 @@
 #ifndef __KLINCOS_PORT_H__
 #define __KLINCOS_PORT_H__
 
-
-
 #include "libcos/types.h"
 
 #define PRINT_BUF_LEN 12
@@ -38,7 +36,6 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-
 
 
 typedef enum PORTTIMESEC {
@@ -104,7 +101,6 @@ void 			port_iodelay(int count);
 void 			port_intr_enable();
 void 			port_intr_disable() ;
 void 			port_halt();
-
 
 
 #ifdef __cplusplus

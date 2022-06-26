@@ -63,7 +63,7 @@ int isprint(int c)  {
 
 
 int ispoint (int c) {
-    return (c == '.')
+    return (c == '.');
 }
 int isexponent(int c) {
     return (c == 'e' || c == 'E') ;

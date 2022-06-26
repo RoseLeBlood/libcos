@@ -9,7 +9,7 @@
 #define ISNAN(p)  ((p[0] == 'n' || p[0] == 'N') && (p[1] == 'a' || p[1] == 'A') && (p[2] == 'n' || p[2] == 'N')) 
 
 double strtod  (const char* nptr, char** endptr) {
-	if (ptr == (char **)0) {
+	if (nptr == (char **)0) {
 			return 0.0;
 	}
 
@@ -43,13 +43,13 @@ double strtod  (const char* nptr, char** endptr) {
 
           if (p[_index] == '+' || p[_index] == '-')  ++_index;
           if (isdigit (p[_index]))  {
-            while (isdigit (p[_index])) ++i;
+            while (isdigit (p[_index])) ++_index;
               	if(*endptr != 0) *endptr = p + _index;
-              	return atof (str);
+              	return atof (nptr);
             }
         }
       	if(*endptr != 0)*endptr = p;
-      	return atof (str);
+      	return atof (nptr);
     }
 
   if(*endptr != 0)	*endptr = nptr;
