@@ -20,13 +20,13 @@ int                                     atoi            (const char* nptr);
 
 long int                                atol            (const char* nptr);
 long long int                           atoll           (const char* nptr);
-double                          strtod  (const char* nptr, char** endptr);
-float                           strtof          (const char* nptr, char** endptr);
+double                                  strtod  (const char* nptr, char** endptr);
+float                                   strtof          (const char* nptr, char** endptr);
 long double                             strtold (const char* nptr, char** endptr);
 long int                                strtol  (const char* nptr, char** endptr, int base);
 long long int                           strtoll (const char* nptr, char** endptr, int base);
-unsigned long int               strtoul (const char* nptr, char** endptr, int base);
-unsigned long long int  		strtoull        (const char* nptr, char** endptr, int base);    
+unsigned long int                       strtoul (const char* nptr, char** endptr, int base);
+unsigned long long int  		        strtoull        (const char* nptr, char** endptr, int base);    
 int                                     rand  ();
 void                                    srand (unsigned int seed);
 int										rand_m(unsigned int min, unsigned int max);
