@@ -19,7 +19,15 @@ KLIBC = \
     src/libcos/math_trigo.o \
     src/libcos/ctype.o \
     src/libcos/errno.o \
-    src/libcos/stdlib.o \
+    src/libcos/stdlib/stdlib.o \
+    src/libcos/stdlib/bsearch.o \
+    src/libcos/stdlib/qsort.o \
+    src/libcos/stdlib/strod.o \
+    src/libcos/stdlib/strof.o \
+    src/libcos/stdlib/strol.o \
+    src/libcos/stdlib/stroll.o \
+    src/libcos/stdlib/stroul.o \
+    src/libcos/stdlib/stroull.o \
     src/libcos/sys/utsname.o \
     src/libcos/memclr.o \
     src/libcos/getopt.o \
