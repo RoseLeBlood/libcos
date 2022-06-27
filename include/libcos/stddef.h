@@ -24,7 +24,7 @@ typedef int wchar_t;
 #endif
 
 #undef offsetof
-#define offsetof(type,member) ((size_t) &((type*)0)->member)
+#define offsetof(type, member) ((size_t) &((type*)0)->member)
 
 
 #define BYTE1(a) ( (a)      & 0xFF)
@@ -45,6 +45,8 @@ typedef int wchar_t;
 
 #define PTV(TYPE, POINTER)   (*((TYPE*)POINTER))
 #define VTP(TYPE, VALUE)     ((TYPE*)&VALUE)
+
+#define ADDRESSOF(T)        __builtin_addressof(T);
 
 #ifndef __cplusplus
 #define noreturn _Noreturn
