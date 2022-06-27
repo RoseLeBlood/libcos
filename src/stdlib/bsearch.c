@@ -11,11 +11,12 @@ void* bsearch (const void* key, const void* base, size_t nmemb, size_t size, cmp
 	for(lim = nmemb; lim != 0; lim >>= 1) {
 		p = ptr + (lim >> 1) * size;
 		cmp = (*compar)( key, p, args);
-		if(cmp == COMPARE_TRUE) {
+		
+		if(cmp == COMPARE_LESS) {
 			result = ((void*)(uintptr_t)p);
             break;
 		}
-		if(cmp > COMPARE_TRUE) { 
+		if(cmp == COMPARE_GRATER) { 
 			ptr = (const char*)p + size;
 			lim--;
 		} 

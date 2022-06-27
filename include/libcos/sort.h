@@ -2,34 +2,47 @@
 #define KLIBCOS_SORT_H
 
 #include "ctype.h"
+#include "stddef.h"
 
 #ifdef	__cplusplus
 extern "C" {
 #endif
 
-#define COMPARE_TRUE        0
-#define COMPARE_FALSE       1
+#define COMPARE_LESS        -1
+#define COMPARE_GRATER       1
+#define COMPARE_EQUIVALENT   0
 
-typedef int (*cmpfunc_t) (const int32_t a, const int32_t b, void* args);
+typedef int (*cmpfunc_t) (const void*, const void*, void*);
 
-inline int compare_less(const int32_t a, const int32_t b, void* args) {
-    return (a < b) ? COMPARE_TRUE : COMPARE_FALSE; 
+static inline int compare_less(const void* pa, const void* pb, void* args) {
+    if( PTV(int32_t, pa) == PTV(int32_t, pb) ) return COMPARE_EQUIVALENT;
+    return ( PTV(int32_t, pa) < PTV(int32_t, pb) ) ? COMPARE_LESS : COMPARE_GRATER; 
 }
-inline int compare_graeter(const int32_t a, const int32_t b, void* args) {
-    return (a > b) ? COMPARE_TRUE : COMPARE_FALSE; 
+static inline int compare_graeter(const void* pa, const void* pb, void* args) {
+    if( PTV(int32_t, pa) == PTV(int32_t, pb) ) return COMPARE_EQUIVALENT;
+    return ( PTV(int32_t, pa) > PTV(int32_t, pb) ) ? COMPARE_GRATER : COMPARE_LESS; 
 }
 
-void quick_sort(void* begin, void* end, cmpfunc_t compar, void* args);
-void quick_sort_r(void* begin, void* end);
+static inline int compare_sub(const void* pa, const void* pb, void* args) {
+    if( PTV(int32_t, pa) == PTV(int32_t, pb) ) return COMPARE_EQUIVALENT;
+    return ( PTV(int32_t, pa) - PTV(int32_t, pb) ); 
+}
+static inline int compare_add(const void* pa, const void* pb, void* args) {
+    if( PTV(int32_t, pa) == PTV(int32_t, pb) ) return COMPARE_EQUIVALENT;
+    return (PTV(int32_t, pa) + PTV(int32_t, pb) ); 
+}
 
-void shell_sort(void* begin, void* end, cmpfunc_t compar, void* args);
-void shell_sort_r(void* begin, void* end);
+void quick_sort_s(void* begin, void* end, cmpfunc_t compar, void* args);
+void quick_sort(void* begin, void* end);
 
-void insertion_sort(void* begin, void* end, cmpfunc_t compar, void* args) ;
-void insertion_sort_r(void* begin, void* end);
+void shell_sort_s(void* begin, void* end, cmpfunc_t compar, void* args);
+void shell_sort(void* begin, void* end);
 
-void heap_sort(void* begin, void* end, cmpfunc_t compar, void* args) ;
-void heap_sort_r(void* begin, void* end);
+void insertion_sort_s(void* begin, void* end, cmpfunc_t compar, void* args) ;
+void insertion_sort(void* begin, void* end);
+
+void heap_sort_s(void* begin, void* end, cmpfunc_t compar, void* args) ;
+void heap_sort(void* begin, void* end);
 
 
 #ifdef	__cplusplus

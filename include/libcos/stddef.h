@@ -43,6 +43,9 @@ typedef int wchar_t;
 
 #define SAFE_DELETE(c)	if(c != NULL) { free(c); c = NULL; }
 
+#define PTV(TYPE, POINTER)   (*((TYPE*)POINTER))
+#define VTP(TYPE, VALUE)     ((TYPE*)&VALUE)
+
 #ifndef __cplusplus
 #define noreturn _Noreturn
 #endif
