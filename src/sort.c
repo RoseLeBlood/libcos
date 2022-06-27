@@ -11,8 +11,23 @@ void __private_quick_sort(int32_t* data, long low, long high, cmpfunc_t compar, 
             while (data[i] < pivot) ++i;
             while (pivot < data[j]) --j;
 
+            int cmp = compar(&j, &i, args);
+
+            switch (cmp){
+            case COMPARE_GRATER:
+            case COMPARE_EQUIVALENT:
+                if (i != j) {
+                    int32_t tmp = data[i];
+                    data[i] = data[j];
+                    data[j] = tmp;
+                }
+                break;
+            }
+            ++i;
+            --j;
+
             // Anything to swap?
-            if (j >= i) {
+            /*if (j >= i) {
                 if (i != j) {
                     int32_t tmp = data[i];
                     data[i] = data[j];
@@ -20,7 +35,7 @@ void __private_quick_sort(int32_t* data, long low, long high, cmpfunc_t compar, 
                 }
                 ++i;
                 --j;
-            }
+            }*/
         } while (i <= j);
 
         if (low < j) __private_quick_sort(data, low, j, compar, args);
@@ -124,7 +139,7 @@ void heap_sort(void* begin, void* end) {
 }
 
  void insertion_sort(void* begin, void* end) {
-	insertion_sort(begin, end, compare_less, NULL);
+	insertion_sort_s(begin, end, compare_less, NULL);
 }
 
 void shell_sort_s(void* begin, void* end, cmpfunc_t compar, void* args) {

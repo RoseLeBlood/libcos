@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <ctype.h>
+#include "string.h"
 
 #define ISINF(p) ((p[0] == 'i' || p[0] == 'I') && (p[1] == 'n' || p[1] == 'N')  && (p[2] == 'f' || p[2] == 'F'))
 
@@ -9,7 +10,7 @@
 #define ISNAN(p)  ((p[0] == 'n' || p[0] == 'N') && (p[1] == 'a' || p[1] == 'A') && (p[2] == 'n' || p[2] == 'N')) 
 
 double strtod  (const char* nptr, char** endptr) {
-	if (nptr == (char **)0) {
+	if (nptr == 0) {
 			return 0.0;
 	}
 
@@ -52,6 +53,6 @@ double strtod  (const char* nptr, char** endptr) {
       	return atof (nptr);
     }
 
-  if(*endptr != 0)	*endptr = nptr;
+  if(*endptr != 0)	strcpy(*endptr, nptr);
   	return 0.0;
 }
