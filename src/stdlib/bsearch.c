@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include <ctype.h>
 
-void* bsearch (const void* key, const void* base, size_t nmemb, size_t size, compar_t compar, void* args) {
+void* bsearch (const void* key, const void* base, size_t nmemb, size_t size, cmpfunc_t compar, void* args) {
     const char* ptr = base;
     size_t lim;
     int cmp;
@@ -10,12 +10,12 @@ void* bsearch (const void* key, const void* base, size_t nmemb, size_t size, com
 
 	for(lim = nmemb; lim != 0; lim >>= 1) {
 		p = ptr + (lim >> 1) * size;
-		cmp = (*compar)(args, key, p);
-		if(cmp == 0) {
+		cmp = (*compar)( key, p, args);
+		if(cmp == COMPARE_TRUE) {
 			result = ((void*)(uintptr_t)p);
             break;
 		}
-		if(cmp > 0) { 
+		if(cmp > COMPARE_TRUE) { 
 			ptr = (const char*)p + size;
 			lim--;
 		} 
@@ -23,6 +23,6 @@ void* bsearch (const void* key, const void* base, size_t nmemb, size_t size, com
 	return result;
 }
 
-void*  bsearch_r(const void* key, const void* base, size_t nmemb, size_t size, compar_t compar) {
-        return bsearch(key, base, nmemb, size, compar, NULL);
+void*  bsearch_r(const void* key, const void* base, size_t nmemb, size_t size, cmpfunc_t compar) {
+    return bsearch(key, base, nmemb, size, compar, NULL);
 }

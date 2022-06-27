@@ -8,8 +8,7 @@ extern "C" {
 #endif
 
 #include <stddef.h>
-
-typedef int (*compar_t)(void* args, const void*, const void*);
+#include "sort.h"
 
 typedef struct  { int quot; int rem; }                          div_t;
 typedef struct  { long quot; long rem; }                        ldiv_t;
@@ -32,11 +31,11 @@ void                                    srand (unsigned int seed);
 int										rand_m(unsigned int min, unsigned int max);
 
 
-void*                                   bsearch (const void* key, const void* base, size_t nmemb, size_t size, compar_t compar, void* args);
-void*                                   bsearch_r(const void* key, const void* base, size_t nmemb, size_t size, compar_t compar);
+void*                                   bsearch (const void* key, const void* base, size_t nitems, size_t size, cmpfunc_t compar, void* args);
+void*                                   bsearch_r(const void* key, const void* base, size_t nitems, size_t size, cmpfunc_t compar);
 
-void                                    qsort           (void* base, size_t nmemb, size_t size, compar_t compar, void* args);
-void                                    qsort_r         (void* base, size_t nmemb, size_t size, compar_t compar);
+void                                    qsort (void* base, size_t nitems, size_t size, cmpfunc_t compar, void* args);
+void                                    qsort_r (void* base, size_t nitems, size_t size, cmpfunc_t compar);
 
 int                                     abs             (int j);
 long int                                labs            (long int j);
