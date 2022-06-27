@@ -45,7 +45,7 @@ size_t  strlen          (const char* s)                                         
 void * memclr(void * mem, size_t count);
 
 char *strdup (const char *s);
-long strtol(const char *str, char **endptr, int base);
+
 /*#define memcpy(d,s,n)                           __builtin_memcpy(d,s,n)
 #define strcpy(d,s)                             __builtin_strcpy(d,s)
 #define strncpy(d,s,n)                          __builtin_strncpy(d,s,n);
