@@ -25,7 +25,8 @@ long double                             strtold (const char* nptr, char** endptr
 long int                                strtol  (const char* nptr, char** endptr, int base);
 long long int                           strtoll (const char* nptr, char** endptr, int base);
 unsigned long int                       strtoul (const char* nptr, char** endptr, int base);
-unsigned long long int  		        strtoull        (const char* nptr, char** endptr, int base);    
+unsigned long long int  		        strtoull        (const char* nptr, char** endptr, int base); 
+   
 int                                     rand  ();
 void                                    srand (unsigned int seed);
 int										rand_m(unsigned int min, unsigned int max);
@@ -33,9 +34,18 @@ int										rand_m(unsigned int min, unsigned int max);
 
 void*                                   bsearch (const void* key, const void* base, size_t nitems, size_t size, cmpfunc_t compar, void* args);
 void*                                   bsearch_r(const void* key, const void* base, size_t nitems, size_t size, cmpfunc_t compar);
-
+                                        //quick_sort
 void                                    qsort (void* base, size_t nitems, size_t size, cmpfunc_t compar, void* args);
 void                                    qsort_r (void* base, size_t nitems, size_t size, cmpfunc_t compar);
+                                        //shell sort
+void                                    ssort (void* base, size_t nitems, size_t size, cmpfunc_t compar, void* args);
+void                                    ssort_r (void* base, size_t nitems, size_t size, cmpfunc_t compar);
+                                        //insertion_sort
+void                                    isort (void* base, size_t nitems, size_t size, cmpfunc_t compar, void* args);
+void                                    isort_r (void* base, size_t nitems, size_t size, cmpfunc_t compar);
+                                        //heap_sort
+void                                    hsort (void* base, size_t nitems, size_t size, cmpfunc_t compar, void* args);
+void                                    hsort_r (void* base, size_t nitems, size_t size, cmpfunc_t compar);
 
 int                                     abs             (int j);
 long int                                labs            (long int j);

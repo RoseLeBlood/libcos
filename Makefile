@@ -21,7 +21,7 @@ KLIBC = \
     src/libcos/errno.o \
     src/libcos/stdlib/stdlib.o \
     src/libcos/stdlib/bsearch.o \
-    src/libcos/stdlib/qsort.o \
+    src/libcos/stdlib/sorts.o \
     src/libcos/stdlib/strod.o \
     src/libcos/stdlib/strof.o \
     src/libcos/stdlib/strol.o \
