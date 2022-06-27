@@ -150,3 +150,23 @@ void shell_sort(void* begin, void* end) {
     if (end - begin > 1)
 			__private_shell_sort(begin, (size_t)(end - begin), compare_less, NULL);
 }
+
+
+_Bool is_sorted(void* begin, void* end) {
+
+    void* _b = begin;
+    void* _prev = _b;
+    _Bool is_sorted = true;
+
+    while (_b != end) {
+        if (_prev != _b) {
+            if (PTV(int32_t, _b) > PTV(int32_t, _prev)) {
+                is_sorted = false;
+                break;
+            }
+        }
+        _prev = _b;
+        ++_b;
+    }
+    return is_sorted;
+}

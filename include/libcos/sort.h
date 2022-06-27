@@ -45,6 +45,8 @@ void heap_sort_s(void* begin, void* end, cmpfunc_t compar, void* args) ;
 void heap_sort(void* begin, void* end);
 
 
+_Bool is_sorted(void* begin, void* end);
+
 #ifdef	__cplusplus
 }
 #endif
