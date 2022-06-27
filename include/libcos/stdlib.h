@@ -1,7 +1,5 @@
-#ifndef STDLIB_H
-#define STDLIB_H
-
-
+#ifndef KLIBC_STDLIB_H
+#define KLIBC_STDLIB_H
 
 #ifdef __cplusplus
 extern "C" {
