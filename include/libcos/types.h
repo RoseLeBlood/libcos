@@ -1,15 +1,17 @@
 #ifndef TYPES_H
 #define TYPES_H
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 #include "stddef.h"
 #include "stdbool.h"
 #include "stdint.h"
 #include "endian.h"
 #include "limits.h"
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+
 
 #define HIGHBYTE(w) (BYTE)(((w) >> 8) & 0xFF) //Das oberer BYTE eines WORDs
 #define  LOWBYTE(w) (BYTE)((w) & 0xFF)        //Das untere BYTE eines WORDs
