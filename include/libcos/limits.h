@@ -111,4 +111,6 @@
 #define WINT_MIN 0
 #define WINT_MAX (~(wint_t)0)
 
+#define NLZ(X) ( (sizeof(X) * CHAR_BIT - __builtin_clzll(X) ) - 1)
+
 #endif
