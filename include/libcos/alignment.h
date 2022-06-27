@@ -34,6 +34,15 @@ extern "C" {
 #define SHORT_ALIGNMENT_TYPE                short
 #define CHAR_ALIGNMENT_TYPE                 char
 
+#define ALIGN_DOWN(addr, size)              ((addr) / (size) * (size))
+#define ALIGN_UP(addr, size)                ALIGN_DOWN((addr) + (size) - 1, (size))
+
+#define ALIGN_PTR_DOWN(ptr, size)           ((typeof(p))ALIGN_DOWN((uintptr_t)(ptr), (size)))
+#define ALIGN_PTR_UP(ptr, size)             ((typeof(p))ALIGN_UP((uintptr_t)(ptr), (size)))
+
+#define IS_ALIGNED(addr, size)              (((addr) % (size)) == 0)
+#define PTR_IS_ALIGNED(ptr, size)           IS_ALIGNED((uintptr_t)(ptr), (size))
+
 typedef struct __attribute__ ((aligned (1)))  aligned1 	{  uint8_t member; } aligned1_t;
 typedef struct __attribute__ ((aligned (2)))  aligned2 	{ uint16_t member; } aligned2_t;
 typedef struct __attribute__ ((aligned (4)))  aligned4 	{ uint32_t member; } aligned4_t;
@@ -53,10 +62,6 @@ typedef union max_align {
 }max_align_t;
 
 #define MAX_ALIGNMENT sizeof(max_align_t)
-
-static inline _Bool is_aligned(void* p, size_t a) {
-    return (uintptr_t)p % a == 0;
-}
 
 static inline size_t alignment_for(const size_t size) {
     if(size >= MAX_ALIGNMENT ) return MAX_ALIGNMENT;
@@ -80,30 +85,6 @@ static inline size_t alignment_offset(void* address, size_t alignment) {
 
 
 
-
-static inline void* align_up(void* address, size_t align)  {
-    assert(align > 0 && (align & (align - 1)) == 0); /* Power of 2 */
-    assert(address != 0);
-
-    uintptr_t addr  = (uintptr_t)address;
-    if (addr % align != 0)
-        addr += align - addr % align;
-    assert(addr >= (uintptr_t)address);
-
-    return (uint8_t *)addr;
-}
-
-static inline void* align_down(void* address, size_t align))
-{
-    assert(align > 0 && (align & (align - 1)) == 0); /* Power of 2 */
-    assert(stack != 0);
-
-    uintptr_t addr  = (uintptr_t)address;
-    addr &= -align;                         // Round down to align-byte boundary
-    assert(addr <= (uintptr_t)address);
-
-    return (uint8_t *)addr;
-}
 
 #ifdef	__cplusplus
 }
