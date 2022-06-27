@@ -1,13 +1,16 @@
 #ifndef KLIBC_STRING_H
 #define KLIBC_STRING_H
 
+#include <stddef.h>
+#include <stdint.h>
+#include <malloc.h>
+
 #ifdef __cplusplus
 extern "C" 
 {
 #endif
 
-#include <stddef.h>
-#include <stdint.h>
+
 
 #ifndef ZeroMemory
 #define ZeroMemory(d, n) memset(d,0,n)
