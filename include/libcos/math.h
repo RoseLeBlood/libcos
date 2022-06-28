@@ -90,7 +90,7 @@ float                   expm1f(float x);
 long double             expm1l(long double x);
 double                  frexp(double x, int* exp);
 float                   frexpf(float x, int* exp);
-long double             frexpl(long double x, int exp);
+long double             frexpl(long double x, int* exp);
 int                     ilogb(double x);
 int                     ilogbf(float x);
 int                     ilogbl(long double x);

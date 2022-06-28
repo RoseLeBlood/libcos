@@ -193,14 +193,14 @@ long double             scalblnl(long double x, long int n)
 
 double                  frexp(double x, int* exp)  {
 	*exp = (x == 0) ? 0 : (int)(1 + logb(x));
-	return scalbn(value, -(*exp));
+	return scalbn(x, -(*exp));
 }
 
 float                   frexpf(float x, int* exp) {
 	*exp = (x == 0) ? 0 : (int)(1 + logbf(x));
-	return scalbnf(value, -(*exp));
+	return scalbnf(x, -(*exp));
 }
-long double             frexpl(long double x, int exp) {
+long double             frexpl(long double x, int* exp) {
 	*exp = (x == 0) ? 0 : (int)(1 + logbf(x));
-	return scalbnl(value, -(*exp));
+	return scalbnl(x, -(*exp));
 }
