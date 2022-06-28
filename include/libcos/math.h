@@ -1,16 +1,18 @@
-#ifndef KLIBC_MATH_H
-#define KLIBC_MATH_H
+#ifndef KLIBCOS_MATH_H
+#define KLIBCOS_MATH_H
 
 #include <types.h>
 
-#ifdef __cplusplus
-extern "C"
-{
-#endif
+#define M_PI           3.14159265358979323846  
+#define M_PI_2         1.57079632679489661923  /* pi/2 */
+#define M_PI_4         0.78539816339744830962  /* pi/4 */
 
-#define PI					(3.1415926535897932384626433832795f)
-#define SSE_XMM_SIZE  		128/8
-	
+#define FP_NAN         0
+#define FP_INFINITE    1
+#define FP_ZERO        2
+#define FP_SUBNORMAL   3
+#define FP_NORMAL      4
+
 #define                 isgreater(x,y)                  __builtin_isgreater(x,y)
 #define                 isgreaterequal(x,y)             __builtin_isgreaterequal(x,y)
 #define                 isless(x,y)                     __builtin_isless(x,y)
@@ -24,6 +26,19 @@ extern "C"
 #define                 isnan(x)                        __builtin_isnan(x)
 #define                 isnormal(x)                     __builtin_isnormal(x)
 #define                 signbit(x)                      (__builtin_isnan(x) ? 0 : ((x) < 0))
+
+#define                 HUGE_VAL                        (1.0e999999999)
+#define                 HUGE_VALF                       (1.0e999999999F)
+#define                 HUGE_VALL                       (1.0e999999999L)
+
+#define                 INFINITY                        (HUGE_VALF)
+
+#ifdef __cplusplus
+extern "C"
+{
+#endif
+
+
 
 double                  acos(double x);
 float                   acosf(float x);
@@ -73,9 +88,9 @@ long double             exp2l(long double x);
 double                  expm1(double x);
 float                   expm1f(float x);
 long double             expm1l(long double x);
-//double                  frexp(double x, int* exp);
-//float                   frexpf(float x, int* exp);
-//long double             frexpl(long double x, int* exp);
+double                  frexp(double x, int* exp);
+float                   frexpf(float x, int* exp);
+long double             frexpl(long double x, int exp);
 int                     ilogb(double x);
 int                     ilogbf(float x);
 int                     ilogbl(long double x);
@@ -85,9 +100,9 @@ long double             ldexpl(long double x, int exp);
 double                  log(double x);
 float                   logf(float x);
 long double             logl(long double x);
-//double                  		log10(double x);
-//float                           log10f(float x);
-//long double             		log10l(long double x);
+double                  log10(double x);
+float                   log10f(float x);
+long double             log10l(long double x);
 double                  log1p(double x);
 float                   log1pf(float x);
 long double             log1pl(long double x);
@@ -166,12 +181,8 @@ long double             truncl(long double x);
 double                  fmod(double x, double y);
 float                   fmodf(float x, float y);
 long double             fmodl(long double x, long double y);
-//double                  remainer(double x, double y);
-//float                   remainerf(float x, float y);
-//long double             remainerl(long double x, long double y);
-//double                  remquo(double x, double y, int* quo);
-//float                   remquof(float x, float y, int* quo);
-//long double             remquol(long double x, long double y, int* quo);
+double                  remainer(double x, double y);
+float                   remainerf(float x, float y);
 double                  copysign(double x, double y);
 float                   copysignf(float x, float y);
 long double             copysignl(long double x, long double y);

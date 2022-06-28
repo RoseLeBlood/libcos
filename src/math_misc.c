@@ -300,3 +300,34 @@ float fmaf(float x, float y, float z) {
 long double fmal(long double x, long double y, long double z) {
         return x * y + z;
 }
+
+double remainder(double x, double y) {
+	register double res, ratio, n, two_c;
+
+	ratio = x/y;
+	n = round(ratio);
+
+	two_c = fmod(n,2.0);
+
+	if (!(fabs(n-ratio) == 0.5) )  {
+		n = n - two_c;
+	}
+	res = x - n * y;
+
+	return res;
+}
+float remainderf(float x, float y) {
+	register float res, ratio, n, two_c;
+
+	ratio = x/y;
+	n = roundf(ratio);
+
+	two_c = fmodf(n,2.0);
+
+	if (!(fabsf(n-ratio) == 0.5f) )  {
+		n = n - two_c;
+	}
+	res = x - n * y;
+
+	return res;
+}

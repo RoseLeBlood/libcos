@@ -102,7 +102,15 @@ long double logl(long double x)
 	return __builtin_logl(x);
 }
 
-
+double log10(double x) {
+	return __builtin_log10(x);
+}
+float log10f(float x) {
+	return __builtin_log10f(x);
+}
+long double log10l(long double x) {
+	return __builtin_log10l(x);
+}
 
 double log1p(double x) 
 {
@@ -181,4 +189,18 @@ float                   scalblnf(float x, long int n)
 long double             scalblnl(long double x, long int n)
 {
 	return __builtin_scalblnl(x, n);
+}
+
+double                  frexp(double x, int* exp)  {
+	*exp = (x == 0) ? 0 : (int)(1 + logb(x));
+	return scalbn(value, -(*exp));
+}
+
+float                   frexpf(float x, int* exp) {
+	*exp = (x == 0) ? 0 : (int)(1 + logbf(x));
+	return scalbnf(value, -(*exp));
+}
+long double             frexpl(long double x, int exp) {
+	*exp = (x == 0) ? 0 : (int)(1 + logbf(x));
+	return scalbnl(value, -(*exp));
 }
