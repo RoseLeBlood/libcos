@@ -9,7 +9,7 @@
 extern "C" {
 #endif
 
-#define CHECK_TYPE_IS_ALIGNMENT(TYPE)       sizeof(TYPE) > 0
+#define CHECK_TYPE_IS_ALIGNMENT(TYPE)       _Alignof(TYPE) > 0
 
 #define TYPE_WITH_ALIGNMENT_CHAR            sizeof(char),
 #define TYPE_WITH_ALIGNMENT_SHORT           sizeof(short),
@@ -24,7 +24,7 @@ extern "C" {
 #define ALIGNMENT_OF_CONST_VOLATILE_VOID    0
 #define ALIGNMENT_OF_VOLATILE_VOID          0
 
-#define ALIGNMENT_OF_TYPE(TYPE)             sizeof(TYPE)  
+#define ALIGNMENT_OF_TYPE(TYPE)             _Alignof(TYPE)  
 
 #define LONG_DOUBLE_ALIGNMENT_TYPE          max_align_t
 #define DOUBLE_ALIGNNMENT_TYPE              double
@@ -61,7 +61,7 @@ typedef union max_align {
     double d;
 }max_align_t;
 
-#define MAX_ALIGNMENT sizeof(max_align_t)
+#define MAX_ALIGNMENT 8ull
 
 static inline size_t alignment_for(const size_t size) {
     if(size >= MAX_ALIGNMENT ) return MAX_ALIGNMENT;
