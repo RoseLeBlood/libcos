@@ -1,5 +1,5 @@
-#ifndef KLIBC_EBOSTORAGE_H
-#define KLIBC_EBOSTORAGE_H
+#ifndef KLIBC_STORAGE_H
+#define KLIBC_STORAGE_H
 
 #include "types.h"
 
