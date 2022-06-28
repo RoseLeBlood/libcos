@@ -1,6 +1,6 @@
 {
     "name": "libcos",
-    "version": "0.3.0",
+    "version": "1.0.2",
     "description": "A vey simple c kernel libary, see README for porting ",
     "keywords": "native, osdev, libc",
     "repository":
