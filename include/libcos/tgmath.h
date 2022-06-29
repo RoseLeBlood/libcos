@@ -1,3 +1,27 @@
+/*
+* MIT License
+*
+* Copyright (c) 2022 Amber-Sophia Schröck
+
+* Permission is hereby granted, free of charge, to any person obtaining a copy
+* of this software and associated documentation files (the "Software"), to deal
+* in the Software without restriction, including without limitation the rights
+* to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+* copies of the Software, and to permit persons to whom the Software is
+* furnished to do so, subject to the following conditions:
+*
+* The above copyright notice and this permission notice shall be included in all
+* copies or substantial portions of the Software.
+*
+* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+* OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+* SOFTWARE.
+*/
+
 #ifndef KLIBC_TGMATH_H
 #define KLIBC_TGMATH_H
 
@@ -62,8 +86,6 @@
 #define nearbyint(x)     __REALFUNC1_TGMATH(x, nearbyint)
 #define nextafter(x,y)   __REALFUNC2_TGMATH(x, y, nextafter)
 #define nexttoward(x,y)  __REALFUNC2_TGMATH(x, y, nexttoward)
-#define remainder(x,y)   __REALFUNC2_TGMATH(x, y, remainder)
-#define remquo(x,y,z)    __REALFUNC3_TGMATH(x, y, z, remquo)
 #define rint(x)          __REALFUNC1_TGMATH(x, rint)
 #define round(x)         __REALFUNC1_TGMATH(x, round)
 #define scalbn(x,y)      __REALFUNC2_TGMATH(x, y, scalbn)
@@ -72,7 +94,6 @@
 #define trunc(x)         __REALFUNC1_TGMATH(x, trunc)
 
 #define carg(z)          __COMPLEX_TGMATH(z, carg)
-#define conj(z)          __COMPLEX_TGMATH(z, conj)
 #define cproj(z)         __COMPLEX_TGMATH(z, cproj)
 
 #endif
