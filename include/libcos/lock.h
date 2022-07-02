@@ -2,36 +2,35 @@
 #define _STDC_LOCK_H_
 
 #include <types.h>
+#include "utils/atomic_spinlock.h"
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-
-#define LOCK_LOCKED 1
-#define LOCK_UNLOCKED 0
-
-typedef volatile uint8_t lock_t;
-
-void lock(lock_t* l);
-void unlock(lock_t* l);
-bool locked(lock_t* l);
-void lock_wait(lock_t* l);
-
+typedef atomic_spinlock_t lock_t;
 /**
-* Eine Variable Inkrementieren, waerend der Bus gesperrt ist.
-*
-* @param var Pointer auf die zu inkrementierende Variable
-*/
-/*static inline uint32_t locked_increment(volatile uint32_t* var)
-{
-	return __sync_fetch_and_add(var, 1);
-}*/
+ * @brief create a atomic spinlock
+ * lock_t lock = section_create();
+ * if(lock != NULL) {
+ * 		// spinlock created
+ * 		section_enter(lock);
+ * 		// locked
+ * 		section_leave(lock);
+ *		// not locked
+ *		
+ * }
+ * section_destroy(lock);
+ */
+#define section_create 		pAtomicSpinLockCreate()
+/**
+ * @brief enter a section
+ */
+#define section_enter(l) 	xAtomicSpinlockTake(l)
+/**
+ * @brief leave a section
+ */
+#define section_leave(l)	xAtomicSpinlockGive(l)
+/**
+ * @brief destroy a section
+ */
+#define section_destroy(l)	xAtomicSpinlockDestroy(l)
 
-
-
-#ifdef __cplusplus
-}
-#endif
 
 #endif

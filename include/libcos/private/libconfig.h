@@ -28,7 +28,7 @@
 #define KLIBCOS_FALSE               0
 
 #define KLIBCOS_NULTICORE_SYSTEM    KLIBCOS_TRUE
-
+#define KLIBCOS_QUEUE_WITH_LOCK     KLIBCOS_FALSE
 
 #define PRINT_BUF_LEN               12
 
@@ -42,20 +42,5 @@
 #define PORT_MASCHINE_NAME          "windows"
 #define PORT_COMPILER_NAME          "gcc"
 #define PORT_COMPILER_VERSION       "12"
-
-//For task.h
-#define TASK_NAME_MAX_LENGHT    32
-
-#define TASK_STATE_NEW          0
-#define TASK_STATE_READY        1
-#define TASK_STATE_BLOCKED      2
-#define TASK_STATE_SUSPEND      3
-#define TASK_STATE_TERMINATED   4
-#define TASK_STATE_UNKNOWN      5
-
-
-
-
-
 
 #endif

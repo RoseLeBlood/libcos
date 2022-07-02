@@ -36,7 +36,12 @@ typedef struct node {
     struct node* prev;
 } node_t;
 
-
+typedef struct prio_node {
+    void* value;
+    int32 priority;
+    struct prio_node* next;
+    struct prio_node* prev;
+} prio_node_t;
 
 #ifdef __cplusplus
 }

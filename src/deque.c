@@ -1,11 +1,16 @@
 #include "deque.h"
 #include "malloc.h"
+#include "lock.h"
+#include "private/port.h"
 
 typedef struct deque {
     node_t *head;  
     node_t *tail;
     size_t maxSize;
     size_t entries; 
+#if KLIBCOS_QUEUE_WITH_LOCK == KLIBCOS_TRUE
+    lock_t lock;
+#endif
 } deque_t;
 
 size_t deque_get_nentries(deque_t* q) {
@@ -32,18 +37,42 @@ deque_t* deque_create(uint32_t sQueSize) {
     deque_t* _newQueue = (deque_t*) malloc (sizeof(deque_t));
     if (_newQueue == NULL)  return NULL;
 
+#if KLIBCOS_QUEUE_WITH_LOCK == KLIBCOS_TRUE
+    section_create(_newQueue->lock);
+    section_enter(_newQueue->lock); {
+#endif
     _newQueue->head = 0;
     _newQueue->tail = 0;
     _newQueue->entries = 0;
     _newQueue->maxSize = sQueSize;
 
+#if KLIBCOS_QUEUE_WITH_LOCK == KLIBCOS_TRUE
+    }
+    section_leave(_newQueue->lock);
+#endif
     return _newQueue;
+}
+void queue_delete(deque_t* q) {
+    if(q == NULL) return ;
+
+#if KLIBCOS_QUEUE_WITH_LOCK == KLIBCOS_TRUE
+    section_enter(q->lock); {
+#endif
+    free(q); q = NULL;
+
+#if KLIBCOS_QUEUE_WITH_LOCK == KLIBCOS_TRUE
+    }
+    section_leave(q->lock);
+#endif
 }
 
 int deque_insert_head(deque_t* q, void* pInsert) {
     if(q == NULL) return 4;
-
     if( deque_is_full(q) ) return DEQUE_ERROR_ISFULL;
+
+#if KLIBCOS_QUEUE_WITH_LOCK == KLIBCOS_TRUE
+    section_enter(q->lock); {
+#endif
 
     node_t *_newHead = (node_t*)malloc(sizeof(node_t*));
     if (_newHead == NULL)  return DEQUE_ERROR_OUTOFMEM;
@@ -64,6 +93,11 @@ int deque_insert_head(deque_t* q, void* pInsert) {
 
     q->entries++;
 
+#if KLIBCOS_QUEUE_WITH_LOCK == KLIBCOS_TRUE
+    }
+    section_leave(q->lock);
+#endif
+
     return DEQUE_NO_ERROR;
 }
 
@@ -72,6 +106,9 @@ int deque_insert_tail(deque_t* q, void* pInsert) {
     
     if( deque_is_full(q) ) return DEQUE_ERROR_ISFULL;
 
+#if KLIBCOS_QUEUE_WITH_LOCK == KLIBCOS_TRUE
+    section_enter(q->lock); {
+#endif
     node_t *_newTail = (node_t*)malloc(sizeof(node_t*));
     if (_newTail == NULL)  return DEQUE_ERROR_OUTOFMEM;
 
@@ -89,15 +126,24 @@ int deque_insert_tail(deque_t* q, void* pInsert) {
     }
     q->entries++;
 
+#if KLIBCOS_QUEUE_WITH_LOCK == KLIBCOS_TRUE
+    }
+    section_leave(q->lock);
+#endif
+
     return DEQUE_NO_ERROR;
 }
 
 void* deque_remove_head(deque_t* q, void** pValue) {
     if (q == NULL || q->head == NULL) return NULL;
 
+#if KLIBCOS_QUEUE_WITH_LOCK == KLIBCOS_TRUE
+    section_enter(q->lock); {
+#endif
     node_t* oldHead = q->head;
     void* value = oldHead->value;
     
+
     if (pValue != NULL) *pValue = value;
 
     q->head = oldHead->next;
@@ -108,12 +154,21 @@ void* deque_remove_head(deque_t* q, void** pValue) {
     if(q->head == NULL) q->tail = NULL;
 
     q->entries--;
+
+#if KLIBCOS_QUEUE_WITH_LOCK == KLIBCOS_TRUE
+    }
+    section_leave(q->lock);
+#endif
+
     return value;
 }
 
 void* deque_remove_tail(deque_t* q, void** pValue) {
     if (q == NULL || q->head == NULL) return NULL;
 
+#if KLIBCOS_QUEUE_WITH_LOCK == KLIBCOS_TRUE
+    section_enter(q->lock); {
+#endif
     node_t* oldTail = q->tail;
     void* value = oldTail->value;
 
@@ -128,5 +183,10 @@ void* deque_remove_tail(deque_t* q, void** pValue) {
     if(q->tail == NULL) q->head = NULL;
 
     q->entries--;
+#if KLIBCOS_QUEUE_WITH_LOCK == KLIBCOS_TRUE
+    }
+    section_leave(q->lock);
+#endif
+
     return value;
 }
