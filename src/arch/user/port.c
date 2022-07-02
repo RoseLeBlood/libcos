@@ -24,6 +24,8 @@
 */
 #include "libcos/private/port.h"
 
+#if KLIBCOS_PLATFORM_USEING == KLIBCOS_PLATFORM_USER
+
 // ----------------- malloc.h
 void* port_malloc(size_t size) {
     return NULL;
@@ -79,3 +81,5 @@ void 			port_halt()  {
 void* port_get_curr_stack_pointer() {
     return NULL;
 }
+
+#endif

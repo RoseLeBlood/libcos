@@ -27,6 +27,11 @@
 #define KLIBCOS_TRUE                1
 #define KLIBCOS_FALSE               0
 
+#define KLIBCOS_PLATFORM_USER       4
+
+
+#define KLIBCOS_PLATFORM_USEING     KLIBCOS_PLATFORM_USER
+
 #define KLIBCOS_NULTICORE_SYSTEM    KLIBCOS_TRUE
 #define KLIBCOS_QUEUE_WITH_LOCK     KLIBCOS_FALSE
 
@@ -42,5 +47,8 @@
 #define PORT_MASCHINE_NAME          "windows"
 #define PORT_COMPILER_NAME          "gcc"
 #define PORT_COMPILER_VERSION       "12"
+
+
+
 
 #endif
