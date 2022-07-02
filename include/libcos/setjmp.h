@@ -1,4 +1,3 @@
-
 /*
 * MIT License
 *
@@ -22,70 +21,26 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */
-#include "libcos/private/port.h"
+#ifndef KLIBCOS_SETJMP_H
+#define KLIBCOS_SETJMP_H
 
-#if KLIBCOS_PLATFORM_USEING == KLIBCOS_PLATFORM_USER
+#include "private/port.h"
 
-// ----------------- malloc.h
-void* port_malloc(size_t size) {
-    return NULL;
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+
+
+static inline int     setjmp(jmp_buf_t x) {
+    return port_set_jmp(x);
 }
-void port_free(void* addr) {
-
-}
-
-uint8_t port_time_read(port_time_sec_t addr) {
-        return 0;
-}
-
-void port_putchar(const char c) {
-
-}
-/* port_getchar */
-int port_getchar() {
-     char c = ' '; 
-     
-     //while((c = getch()) == 0);
-     
-     return c;
+static inline void    longjmp(jmp_buf_t x, int y) {
+    port_long_jmp(x, y);
 }
 
-void 			port_io_wait( void )  {
-
-}
-
-void 			port_iodelay(int count)  { 
-    unsigned nloops = (count * (SYS_CLK_KHZ / 1000) + 7) >> 3;
-
-    do {
-            asm volatile ("nop");
-            asm volatile ("nop");
-            asm volatile ("nop");
-            asm volatile ("nop");
-    } while (--nloops);
-}
-
-
-void 			port_intr_enable()  {
-
-}
-
-void 			port_intr_disable()   {
-
-}
-
-void 			port_halt()  {
-
-}
-
-void* port_get_curr_stack_pointer() {
-    return NULL;
-}
-
-int             port_set_jmp(jmp_buf_t x) {
-    return 0;
-}
-void            port_long_jmp(jmp_buf_t x, int y) {
-
+#ifdef __cplusplus
 }
 #endif
+
+#endif // __SETJMP_H_

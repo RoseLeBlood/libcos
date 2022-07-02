@@ -31,6 +31,23 @@
 extern "C" {
 #endif
 
+#if defined(__aarch64__) || defined(_M_ARM64)
+    typedef unsigned long jmp_buf_type[22];
+#elif defined(__x86_64__) || defined(_M_X64)
+    typedef unsigned long jmp_buf_type[8];
+#elif defined(i386) || defined(__i386__) || defined(__i386) || defined(_M_IX86)
+    typedef unsigned long long jmp_buf_type[8];
+#else
+    // Your type for jmp_buf_type
+#endif
+
+typedef struct _jmp_tag {
+	jmp_buf_type __jb;
+	unsigned long __fl;
+	unsigned long __ss[128 / sizeof(long)];
+} jmp_buf_t[1];
+
+typedef jmp_buf_t sigjmp_buf;
 
 typedef enum PORTTIMESEC {
     TIME_READ_ADDR_SEC = 0x00,
@@ -58,6 +75,8 @@ void 			port_halt();
 
 void*           port_get_curr_stack_pointer();
 
+int             port_set_jmp(jmp_buf_t x);
+void            port_long_jmp(jmp_buf_t x, int y);
 
 #ifdef __cplusplus
 }
