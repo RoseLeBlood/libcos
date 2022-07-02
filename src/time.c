@@ -25,6 +25,8 @@
 #include <types.h>
 #include <stdio.h>
 
+#include "libcos/private/port.h"
+
 #define BCD2BIN(bcd) ((((bcd)&15) + ((bcd)>>4)*10))
 
 struct tm *localtime(const time_t *timer)
