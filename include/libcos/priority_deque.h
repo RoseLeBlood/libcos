@@ -36,19 +36,19 @@ extern "C" {
 
 typedef struct prio_deque prio_deque_t;
 
-deque_t*    prio_deque_create(uint32_t sQueSize);
-void        prio_queue_delete(deque_t* q);
+prio_deque_t*   prio_deque_create(uint32_t sQueSize);
+void            prio_queue_delete(prio_deque_t* q);
 
-int         prio_deque_insert_head(deque_t* q, int32_t prio, void* pInsert); // first
-int         prio_deque_insert_tail(deque_t* q, int32_t prio, void* pInsert); // last
+int             prio_deque_insert_head(prio_deque_t* q, int32_t prio, void* pInsert); // first
+int             prio_deque_insert_tail(prio_deque_t* q, int32_t prio, void* pInsert); // last
 
-void*       prio_deque_remove_head(deque_t* q, void** pValue);
-void*       prio_deque_remove_tail(deque_t* q, void** pValue);
+void*           prio_deque_remove_head(prio_deque_t* q, void** pValue);
+void*           prio_deque_remove_tail(prio_deque_t* q, void** pValue);
 
-size_t      prio_deque_get_nentries(deque_t* q);
-size_t      prio_deque_get_size(deque_t* q);
-_Bool       prio_deque_is_full(deque_t* q);
-_Bool       prio_deque_is_empty(deque_t* q);
+size_t          prio_deque_get_nentries(prio_deque_t* q);
+size_t          prio_deque_get_size(prio_deque_t* q);
+_Bool           prio_deque_is_full(prio_deque_t* q);
+_Bool           prio_deque_is_empty(prio_deque_t* q);
 
 
 #if __cplusplus 

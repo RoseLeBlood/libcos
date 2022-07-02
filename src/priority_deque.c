@@ -23,6 +23,7 @@
 */
 #include "priority_deque.h"
 #include "private/port.h"
+#include "malloc.h"
 
 typedef struct prio_deque {
     prio_node_t *head;  
@@ -77,7 +78,7 @@ prio_deque_t* prio_deque_create(uint32_t sQueSize) {
     return _newQueue;
 }
 
-void prio_queue_delete(deque_t* q) {
+void prio_queue_delete(prio_deque_t* q) {
     if(q == NULL) return ;
 
     while(prio_deque_remove_tail(q, NULL) != NULL) { }
@@ -103,7 +104,17 @@ int prio_deque_insert_head_private(prio_deque_t* q, prio_node_t *_newHead) {
         
         return 0;
     } else {
-       return prio_deque_insert_head_private(q->head->next, _newHead);
+        prio_node_t *n = q->head;
+
+        while (n->next != NULL && 
+            n->next->priority < _newHead->priority)   { 
+            n = n->next; 
+        } 
+  
+        n->prev = _newHead;
+        _newHead->next = n;
+        _newHead->prev = NULL;
+        n = _newHead;
     }
     return 0;
 }
@@ -126,9 +137,9 @@ int prio_deque_insert_head(prio_deque_t* q, int32_t prio, void* pInsert) {
     }
 
     _newHead->value = pInsert;
-    _newHead->priority = p;
+    _newHead->priority = prio;
 
-    if(prio_deque_insert_head_private(q, prio, _newHead) == 0) {
+    if(prio_deque_insert_head_private(q, _newHead) == 0) {
         q->entries++;
 
     #if KLIBCOS_QUEUE_WITH_LOCK == KLIBCOS_TRUE
@@ -148,9 +159,9 @@ int prio_deque_insert_tail_private(prio_deque_t* q, prio_node_t *_newTail) {
     if(q == NULL) return 4;
     if( prio_deque_is_full(q) ) return PRIO_DEQUE_ERROR_ISFULL;
 
-    if (q->tail->priority > _newHead->priority) {
+    if (q->tail->priority > _newTail->priority) {
 
-       if (q->head == NULL) {
+        if (q->head == NULL) {
             q->head = q->tail = _newTail;
             _newTail->next = _newTail->prev = NULL;
         }
@@ -163,20 +174,30 @@ int prio_deque_insert_tail_private(prio_deque_t* q, prio_node_t *_newTail) {
         
         return 0;
     } else {
-       return prio_deque_insert_tail_private(q->tail->prev, _newTail);
+       prio_node_t *n = q->tail;
+
+        while (n->prev != NULL && 
+            n->prev->priority > _newTail->priority)   { 
+            n = n->prev; 
+        } 
+  /// TODO: ????
+        n->next = _newTail;
+        _newTail->next = NULL;
+        _newTail->prev = n;
+        n = _newTail;
     }
     return 0;
 }
-int deque_insert_tail(deque_t* q, void* pInsert) {
+int prio_deque_insert_tail(prio_deque_t* q, int32_t prio, void* pInsert) {
     if(q == NULL) return 4;
     
-    if( deque_is_full(q) ) return PRIO_DEQUE_ERROR_ISFULL;
+    if( prio_deque_is_full(q) ) return PRIO_DEQUE_ERROR_ISFULL;
 
 #if KLIBCOS_QUEUE_WITH_LOCK == KLIBCOS_TRUE
     section_enter(q->lock); 
 #endif
 
-    node_t *_newTail = (node_t*)malloc(sizeof(node_t*));
+    prio_node_t *_newTail = (prio_node_t*)malloc(sizeof(prio_node_t*));
     if (_newTail == NULL) {
 
     #if KLIBCOS_QUEUE_WITH_LOCK == KLIBCOS_TRUE
@@ -186,7 +207,7 @@ int deque_insert_tail(deque_t* q, void* pInsert) {
     } 
 
     _newTail->value = pInsert;
-    _newTail->priority = p;
+    _newTail->priority = prio;
 
     if(prio_deque_insert_tail_private(q, _newTail) == 0) {
         q->entries++;
@@ -210,7 +231,7 @@ void* prio_deque_remove_head(prio_deque_t* q, void** pValue) {
     section_enter(q->lock); 
 #endif
 
-    node_t* oldHead = q->head;
+    prio_node_t* oldHead = q->head;
     void* value = oldHead->value;
     
     if (pValue != NULL) *pValue = value;
@@ -236,7 +257,7 @@ void* prio_deque_remove_tail(prio_deque_t* q, void** pValue) {
     section_enter(q->lock); 
 #endif
 
-    node_t* oldTail = q->tail;
+    prio_node_t* oldTail = q->tail;
     void* value = oldTail->value;
 
     q->tail = oldTail->prev;

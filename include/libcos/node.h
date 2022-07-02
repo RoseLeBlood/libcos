@@ -38,7 +38,7 @@ typedef struct node {
 
 typedef struct prio_node {
     void* value;
-    int32 priority;
+    int32_t priority;
     struct prio_node* next;
     struct prio_node* prev;
 } prio_node_t;

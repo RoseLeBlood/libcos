@@ -37,7 +37,7 @@ atomic_spinlock_t*  pAtomicSpinLockCreate() {
 int xAtomicSpinlockTake(atomic_spinlock_t* lock) {
     assert(lock != NULL);
 
-    while(! atomic_compare_exchange_t(&lock, 0, 1,  __ATOMIC_ACQUIRE) ) 
+    while(! atomic_compare_exchange_t(lock, 0, 1,  __ATOMIC_ACQUIRE) ) 
     { }
 
     return KLIBCOS_NOERROR;
@@ -46,14 +46,14 @@ int xAtomicSpinlockTake(atomic_spinlock_t* lock) {
 int xAtomicSpinlockGive(atomic_spinlock_t* lock) {
     assert(lock != NULL);
 
-    atomic_store(&lock, 0, __ATOMIC_RELEASE);
+    atomic_store(lock, 0, __ATOMIC_RELEASE);
     return KLIBCOS_NOERROR;
 }
 
 int xAtomicSpinlockTryTake(atomic_spinlock_t* lock) {
     assert(lock != NULL);
 
-    if(atomic_compare_exchange_t(&lock, 0, 1,  __ATOMIC_ACQUIRE))
+    if(atomic_compare_exchange_t(lock, 0, 1,  __ATOMIC_ACQUIRE))
         return KLIBCOS_ERRROR;
     else 
         xAtomicSpinlockTake(lock);
@@ -64,7 +64,7 @@ int xAtomicSpinlockTryTake(atomic_spinlock_t* lock) {
 int xAtomicSpinlockIsLoked(atomic_spinlock_t*  lock) {
     assert(lock != NULL);
 
-    return __atomic_load_n(&lock, __ATOMIC_SEQ_CST) == 1 ? 
+    return __atomic_load_n(lock, __ATOMIC_SEQ_CST) == 1 ? 
         KLIBCOS_STATE_LOCK : KLIBCOS_STATE_UNLOCK;
 }
 
