@@ -21,21 +21,41 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */
-#include "assert.h"
-#include "libcos/types.h"
-#include "libcos/stdio.h"
-#include "libcos/private/port.h"
+#ifndef __KLINCOS_LIBCONFIG_H__
+#define __KLINCOS_LIBCONFIG_H__
 
-void __assert(const char *ext, const char *file, int line) {
-	printf("assertion failed in file %s, line %d:\n", file, line);
-	printf("%s\n", ext);
-	
-	port_intr_disable();
-	port_halt();;
-}
-void __panic(const char *message, const char *file, int line) {
-	printf("panic: %s at %s : %d\n", message, file, line);
+#define KLIBCOS_TRUE                1
+#define KLIBCOS_FALSE               0
 
-	port_intr_disable();
-	port_halt();
-}
+#define KLIBCOS_NULTICORE_SYSTEM    KLIBCOS_TRUE
+
+
+#define PRINT_BUF_LEN               12
+
+#define SYS_CLK_MHZ                 (3000)
+#define SYS_CLK_KHZ                 (SYS_CLK_MHZ * 1000)
+#define SYS_CLK_HZ                  (SYS_CLK_KHZ * 1000)
+
+#define PORT_SYS_NAME                "native"
+#define PORT_RELEASE_NAME            ""
+#define PORT_CC_VERSION              "1.0"
+#define PORT_MASCHINE_NAME          "windows"
+#define PORT_COMPILER_NAME          "gcc"
+#define PORT_COMPILER_VERSION       "12"
+
+//For task.h
+#define TASK_NAME_MAX_LENGHT    32
+
+#define TASK_STATE_NEW          0
+#define TASK_STATE_READY        1
+#define TASK_STATE_BLOCKED      2
+#define TASK_STATE_SUSPEND      3
+#define TASK_STATE_TERMINATED   4
+#define TASK_STATE_UNKNOWN      5
+
+
+
+
+
+
+#endif
