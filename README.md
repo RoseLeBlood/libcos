@@ -1,4 +1,4 @@
-# libcos 1.1.0
+# libcos 1.1.2
 A simple lib C for osdev
 
 libcos is a very simple biblothek for os developers. It contains simple functions that you need in everyday kernel development.
