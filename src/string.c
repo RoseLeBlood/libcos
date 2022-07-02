@@ -180,11 +180,16 @@ char* strcpy(char* destination, const char* source)
 #undef strncpy
 char* strncpy(char* destination, const char* source, size_t n) 
 {
-        size_t len = strlen(source) + 1;
-        if (len > n) len = n;
-        memcpy(destination, source, len);
-        if (len < n) memset(destination + len, '\0', n - len);
-        return destination;
+    size_t i = 0, r = 0;
+	if (n > 0) {
+		for (i = 0; i < n - 1 && source[i]; ++i) {
+			destination[i] = source[i];
+		}
+		destination[i] = 0;
+
+		r = i + 1;
+	} 
+	return r;
 }
 
 #undef strcat
