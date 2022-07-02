@@ -21,36 +21,38 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */
-#ifndef KLIBCOS_QUEUE_H
-#define KLIBCOS_QUEUE_H
+#ifndef KLIBCOS_PRIORITY_DEQUE_H
+#define KLIBCOS_PRIORITY_DEQUE_H
 
-#include "deque.h"
-#include "priority_deque.h"
+#include "node.h"
 
-/// Queue
+#define PRIO_DEQUE_ERROR_ISFULL 2
+#define PRIO_DEQUE_ERROR_OUTOFMEM 1
+#define PRIO_DEQUE_NO_ERROR 0
 
-typedef deque_t         queue_t;
+#if __cplusplus 
+extern "C" {
+#endif
 
-#define queue_create(size)      deque_create(size);
-#define queue_enqueue(q, value) queue_insert_tail(q, value)
-#define queue_dequeue(q, v)     queue_remove_head(q, v)
+typedef struct prio_deque prio_deque_t;
 
-#define queue_get_nentries(q)   deque_get_nentries(q)
-#define queue_get_size(q)       deque_get_size(q)
-#define queue_is_full(q)        deque_is_full(q)
-#define queue_is_empty(q)       deque_is_empty(q)
+deque_t*    prio_deque_create(uint32_t sQueSize);
+void        prio_queue_delete(deque_t* q);
 
-/// Priorioty Queue
+int         prio_deque_insert_head(deque_t* q, int32_t prio, void* pInsert); // first
+int         prio_deque_insert_tail(deque_t* q, int32_t prio, void* pInsert); // last
 
-typedef prio_deque_t    prio_queue_t;
+void*       prio_deque_remove_head(deque_t* q, void** pValue);
+void*       prio_deque_remove_tail(deque_t* q, void** pValue);
 
-#define prio_queue_create(size)             prio_deque_create(size);
-#define prio_queue_enqueue(q, prio, value)  prio_queue_insert_tail(q, prio, value)
-#define prio_queue_dequeue(q, prio, v)      prio_queue_remove_head(q, prio, v)
+size_t      prio_deque_get_nentries(deque_t* q);
+size_t      prio_deque_get_size(deque_t* q);
+_Bool       prio_deque_is_full(deque_t* q);
+_Bool       prio_deque_is_empty(deque_t* q);
 
-#define prio_queue_get_nentries(q)          prio_deque_get_nentries(q)
-#define prio_queue_get_size(q)              prio_deque_get_size(q)
-#define prio_queue_is_full(q)               prio_deque_is_full(q)
-#define prio_queue_is_empty(q)              prio_deque_is_empty(q)
+
+#if __cplusplus 
+}
+#endif
 
 #endif

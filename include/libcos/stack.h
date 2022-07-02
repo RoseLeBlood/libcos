@@ -25,6 +25,7 @@
 #define KLIBCOS_STACK_H
 
 #include "deque.h"
+#include "priority_deque.h"
 
 typedef deque_t stack_t;
 
@@ -37,5 +38,17 @@ typedef deque_t stack_t;
 #define stack_get_size(q)       deque_get_size(q)
 #define stack_is_full(q)        deque_is_full(q)
 #define stack_is_empty(q)       deque_is_empty(q)
+
+typedef prio_deque_t    prio_stack_t;
+
+#define prio_stack_create(size)      prio_deque_create(size);
+
+#define prio_stack_push(q,p, v)      prio_queue_insert_tail(q,p,v)
+#define prio_stack_pop(q, v)         prio_deque_remove_tail(q, v)
+
+#define prio_stack_get_nentries(q)   prio_deque_get_nentries(q)
+#define prio_stack_get_size(q)       prio_deque_get_size(q)
+#define prio_stack_is_full(q)        prio_deque_is_full(q)
+#define prio_stack_is_empty(q)       prio_deque_is_empty(q)
 
 #endif
