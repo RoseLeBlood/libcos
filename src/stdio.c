@@ -28,6 +28,7 @@
 #include <types.h>
 #include <malloc.h>
 
+#include "libcos/private/port.h"
 
 char** 			make_args(char *str, uint32_t* size)
 {
@@ -143,15 +144,6 @@ int scanf(const char *format, ...)
 
 
 
-/* getchar */
-int getchar()
-{
-        char c; 
-        
-        while((c = getch()) == 0);
-        
-        return c;
-}
 
 
 
@@ -164,7 +156,7 @@ char *gets(char *string)
         int count = 0;
         while(1)
         {
-                *string = (char) getchar(); 
+                *string = (char) port_getchar(); 
         
                 if(*string == '\n') break;
                 else if(*string == '\b')
