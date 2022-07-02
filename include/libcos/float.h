@@ -24,6 +24,8 @@
 #ifndef KLIBCOS_FLOAT_H
 #define	KLIBCOS_FLOAT_H
 
+#include "stddef.h"
+
 #ifdef	__cplusplus
 extern "C" {
 #endif
@@ -80,15 +82,11 @@ extern "C" {
 #define DBL_IS_IEC_60559	__DBL_IS_IEC_60559__
 #define LDBL_IS_IEC_60559	__LDBL_IS_IEC_60559__
 
-#define INFINITY	(__builtin_inff ())
-#define NAN		    (__builtin_nanf (""))
+#define FLT_EVAL_METHOD	__FLT_EVAL_METHOD__
+
 #define FLT_SNAN	(__builtin_nansf (""))
 #define DBL_SNAN	(__builtin_nans (""))
 #define LDBL_SNAN	(__builtin_nansl (""))
-
-#define FLT_EVAL_METHOD	__FLT_EVAL_METHOD__
-
-
 
 
 #ifdef	__cplusplus

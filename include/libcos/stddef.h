@@ -33,6 +33,8 @@
 
 #define NAN (__builtin_nanf(""))
 
+#define INFINITY	(__builtin_inff ())
+
 
 #ifdef __GNUC__
 typedef __PTRDIFF_TYPE__ ptrdiff_t;

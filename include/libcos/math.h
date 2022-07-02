@@ -31,12 +31,6 @@
 #define M_PI_2         1.57079632679489661923  /* pi/2 */
 #define M_PI_4         0.78539816339744830962  /* pi/4 */
 
-#define FP_NAN         0
-#define FP_INFINITE    1
-#define FP_ZERO        2
-#define FP_SUBNORMAL   3
-#define FP_NORMAL      4
-
 #define                 isgreater(x,y)                  __builtin_isgreater(x,y)
 #define                 isgreaterequal(x,y)             __builtin_isgreaterequal(x,y)
 #define                 isless(x,y)                     __builtin_isless(x,y)
