@@ -25,10 +25,11 @@
 #include "libcos/malloc.h"
 #include "assert.h"
 
-atomic_spinlock_t  pAtomicSpinLockCreate() {
-    register atomic_spinlock_t  _newType; 
-
-    atomic_store(&_newType, 0, __ATOMIC_RELEASE);
+atomic_spinlock_t*  pAtomicSpinLockCreate() {
+    atomic_spinlock_t*  _newType = malloc(sizeof(atomic_spinlock_t)); 
+    
+    if(_newType != 0)
+        atomic_store(_newType, 0, __ATOMIC_RELEASE);
 
     return _newType;
 }

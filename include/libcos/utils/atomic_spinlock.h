@@ -34,7 +34,7 @@ extern "C" {
 
 typedef uint32_t atomic_spinlock_t;
 
-atomic_spinlock_t pAtomicSpinLockCreate();
+atomic_spinlock_t* pAtomicSpinLockCreate();
 
 int xAtomicSpinlockGive(atomic_spinlock_t* lock);
 int xAtomicSpinlockTake(atomic_spinlock_t* lock);
