@@ -22,9 +22,9 @@
 * SOFTWARE.
 */
 #include "assert.h"
-#include "libcos/types.h"
-#include "libcos/stdio.h"
-#include "libcos/private/port.h"
+#include "types.h"
+#include "stdio.h"
+#include "private/port.h"
 
 void __assert(const char *ext, const char *file, int line) {
 	printf("assertion failed in file %s, line %d:\n", file, line);

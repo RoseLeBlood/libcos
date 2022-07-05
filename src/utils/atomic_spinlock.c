@@ -21,9 +21,9 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */
-#include "libcos/utils/atomic_spinlock.h"
-#include "libcos/malloc.h"
-#include "assert.h"
+#include "utils/atomic_spinlock.h"
+#include "malloc.h"
+#include "../assert.h"
 
 atomic_spinlock_t*  pAtomicSpinLockCreate() {
     atomic_spinlock_t*  _newType = malloc(sizeof(atomic_spinlock_t)); 

@@ -27,9 +27,9 @@
 #ifndef STDC_ATOMIC_COUNTER_H
 #define STDC_ATOMIC_COUNTER_H
 
-#include "libcos/stdatomic.h"
-#include "assert.h"
-#include "libcos/malloc.h"
+#include "stdatomic.h"
+#include "../assert.h"
+#include "malloc.h"
 
 #ifdef  __cplusplus
 extern "C" {

@@ -21,8 +21,8 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */
-#include "libcos/stdlib.h"
-#include "libcos/errno.h"
+#include "stdlib.h"
+#include "errno.h"
 #include "private/port.h"
 
 #define _ERRNO_ENTRIES_COUNT    16

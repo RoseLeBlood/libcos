@@ -22,7 +22,7 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */
-#include "libcos/private/port.h"
+#include "private/port.h"
 
 #if KLIBCOS_PLATFORM_USEING == KLIBCOS_PLATFORM_USER
 

@@ -46,23 +46,23 @@ _Bool ringbuf_is_full(ringbuf_t* rngb) {
     if(rngb == NULL) return false;
 
      return ((rngb->head == 0 && rngb->tail == rngb->size-1) ||
-             (rngb->tail == (rngb->head-1)%(rngb->size-1)))
+             (rngb->tail == (rngb->head-1)%(rngb->size-1))) ;
 }
 _Bool ringbuf_is_empty(ringbuf_t* rngb) {
     if(rngb == NULL) return false;
 
-    return (rngb->head == -1)
+    return (rngb->head == -1);
 }
 
 ringbuf_t* ringbuf_create(size_t size) {
-    ringbuf_t _newBuffer = (ringbuf_t*) malloc(sizeof(ringbuf_t));
+    ringbuf_t* _newBuffer = (ringbuf_t*) malloc(sizeof(ringbuf_t));
     if(_newBuffer == NULL) return NULL;
 
     _newBuffer->buffer = malloc(sizeof(uint8_t) * size);
     if(_newBuffer == NULL) return NULL;
 
-    rngb->size = size;
-    rngb->head = rngb->tail = -1;
+    _newBuffer->size = size;
+    _newBuffer->head = _newBuffer->tail = -1;
 
     return _newBuffer;
 }

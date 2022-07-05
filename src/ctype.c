@@ -22,7 +22,7 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */
-#include "libcos/types.h"
+#include "types.h"
 
 int isblank(int c) {
     return (c == ' ' || c == '\t');

@@ -24,7 +24,7 @@
 */
 #include <stdlib.h>
 #include <ctype.h>
-#include "libcos/errno.h"
+#include "errno.h"
 
 long strtol(const char *str, char **endptr, int base) {
 

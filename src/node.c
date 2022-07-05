@@ -22,4 +22,4 @@
 * SOFTWARE.
 */
 
-#include "libcos/node.h"
+#include "node.h"

@@ -1,42 +1,41 @@
 cmake_minimum_required(VERSION 3.16)
-SET(PROJ_NAME "cos")
+
 set(CMAKE_C_COMPILER "gcc" )
 set(CMAKE_C_STANDARD 99)
 
+
+SET(CARCH "x64")
+
+
+
 PROJECT(${PROJ_NAME} LANGUAGES C)
-
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -nostdlib  -ffreestanding -nostartfiles -nostdinc -nodefaultlibs  -fno-stack-protector  -Iinclude/libcos")
-
-# Configuration types
-SET(CMAKE_CONFIGURATION_TYPES "Debug;Release" CACHE STRING "Configs" FORCE)
-IF(DEFINED CMAKE_BUILD_TYPE AND CMAKE_VERSION VERSION_GREATER "2.8")
-  SET_PROPERTY(CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS  ${CMAKE_CONFIGURATION_TYPES})
-ENDIF()
-
-SET(${PROJ_NAME}_PATH_INSTALL "/opt/project" CACHE PATH "This directory contains installation Path")
 SET(CMAKE_DEBUG_POSTFIX "d")
 
-include_directories( ${PROJECT_SOURCE_DIR}/include/libcos)
+include_directories( ${PROJECT_SOURCE_DIR}/include/libcos  ${PROJECT_SOURCE_DIR}/include/)
 
 # Configure ARCH
-SET(CARCH "ARM:I386:x64:aarch64:user" CACHE STRING "The build Arch" FORCE)
-
 IF( ${CARCH} STREQUAL "ARM" )
     SET(CARCH_FILES  ${PROJECT_SOURCE_DIR}/src/arch/arm/longjmp.s 
                      ${PROJECT_SOURCE_DIR}/src/arch/arm/setjmp.s)
+                     SET(PROJ_NAME "cos_arm")
 elseif ( ${CARCH} STREQUAL "i386" )
     SET(CARCH_FILES  ${PROJECT_SOURCE_DIR}/src/arch/i386/longjmp.s 
                      ${PROJECT_SOURCE_DIR}/src/arch/i386/setjmp.s)
+                     SET(PROJ_NAME "cos_i386")
 elseif ( ${CARCH} STREQUAL "x64" )
     SET(CARCH_FILES  ${PROJECT_SOURCE_DIR}/src/arch/x86_64/longjmp.s 
                      ${PROJECT_SOURCE_DIR}/src/arch/x86_64/setjmp.s)
+                     SET(PROJ_NAME "cos_x64")
 elseif ( ${CARCH} STREQUAL "aarch64" )
     SET(CARCH_FILES  ${PROJECT_SOURCE_DIR}/src/arch/aarch64/longjmp.s 
                      ${PROJECT_SOURCE_DIR}/src/arch/aarch64/setjmp.s)
+                     SET(PROJ_NAME "cos_aarch64")
 else()
     SET(CARCH_FILES  ${PROJECT_SOURCE_DIR}/src/arch/user/port.c 
                      ${PROJECT_SOURCE_DIR}/src/arch/user/longjmp.s 
                      ${PROJECT_SOURCE_DIR}/src/arch/user/setjmp.s)
+                     SET(PROJ_NAME "cos_user")
 ENDIF()
 
 add_library(${PROJ_NAME} STATIC  
@@ -92,7 +91,7 @@ ${CARCH_FILES}
 )
 
 # Install
-#---------------------------------------------------#
+#-------------------------------------- -------------#
 INSTALL(TARGETS ${PROJ_NAME}
     DESTINATION  "${${PROJ_NAME}_PATH_INSTALL}/lib/${CMAKE_BUILD_TYPE}/"
 )

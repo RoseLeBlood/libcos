@@ -24,7 +24,7 @@
 #ifndef __KLINCOS_PORT_H__
 #define __KLINCOS_PORT_H__
 
-#include "libcos/types.h"
+#include "types.h"
 #include "libconfig.h"
 
 #ifdef __cplusplus

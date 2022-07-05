@@ -25,7 +25,7 @@
 #include <types.h>
 #include <stdio.h>
 
-#include "libcos/private/port.h"
+#include "private/port.h"
 
 #define BCD2BIN(bcd) ((((bcd)&15) + ((bcd)>>4)*10))
 

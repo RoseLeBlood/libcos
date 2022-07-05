@@ -21,7 +21,7 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */
-#include "libcos/sort.h"
+#include "sort.h"
 
 
 void __private_quick_sort(int32_t* data, long low, long high, cmpfunc_t compar, void* args) {

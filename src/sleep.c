@@ -22,8 +22,8 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */
-#include "libcos/types.h"
-#include "libcos/private/port.h"
+#include "types.h"
+#include "private/port.h"
 
 void udelay(uint32_t usec)
 {

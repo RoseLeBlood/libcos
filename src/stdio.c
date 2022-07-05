@@ -28,7 +28,7 @@
 #include <types.h>
 #include <malloc.h>
 
-#include "libcos/private/port.h"
+#include "private/port.h"
 
 char** 			make_args(char *str, uint32_t* size)
 {

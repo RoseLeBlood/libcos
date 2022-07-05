@@ -1,9 +1,9 @@
-#include "libcos/getopt.h"
+#include "getopt.h"
 
 #include "assert.h"
-#include "libcos/errno.h"
-#include "libcos/stdio.h"
-#include "libcos/string.h"
+#include "errno.h"
+#include "stdio.h"
+#include "string.h"
 
 #define __P(x) x
 #define _DIAGASSERT(x) assert(x)
