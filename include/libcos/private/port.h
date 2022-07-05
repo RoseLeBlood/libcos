@@ -75,9 +75,6 @@ void 			port_halt();
 
 void*           port_get_curr_stack_pointer();
 
-int             port_set_jmp(jmp_buf_t x);
-void            port_long_jmp(jmp_buf_t x, int y);
-
 #ifdef __cplusplus
 }
 #endif
