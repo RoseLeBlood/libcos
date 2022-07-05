@@ -30,17 +30,14 @@
 extern "C" {
 #endif
 
+extern int     _setjmp(jmp_buf_t x);
+extern int     setjmp(jmp_buf_t x);
 
-
-static inline int     setjmp(jmp_buf_t x) {
-    return port_set_jmp(x);
-}
-static inline void    longjmp(jmp_buf_t x, int y) {
-    port_long_jmp(x, y);
-}
+extern void    _longjmp(jmp_buf_t x, int y);
+extern void    longjmp(jmp_buf_t x, int y);
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif // __SETJMP_H_
+#endif 
