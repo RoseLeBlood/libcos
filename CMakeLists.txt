@@ -1,8 +1,12 @@
 cmake_minimum_required(VERSION 3.16)
 SET(PROJ_NAME "libcos")
-PROJECT(${PROJ_NAME} LANGUAGES C)
+
+
+set( CMAKE_C_COMPILER "gcc" )
 
 set(CMAKE_C_STANDARD 99)
+
+PROJECT(${PROJ_NAME} LANGUAGES C)
 
 # Configuration types
 SET(CMAKE_CONFIGURATION_TYPES "Debug;Release" CACHE STRING "Configs" FORCE)
@@ -18,60 +22,76 @@ set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -nostdlib  -ffreestanding -nostartfiles -nos
 include_directories( ${PROJECT_SOURCE_DIR}/include/libcos)
 
 # Configure ARCH
-SET(CARCH, ARM)
+SET(CARCH "ARM:I386:x64:aarch64:user" CACHE STRING "Arch" FORCE)
+
+IF( ${CARCH} STREQUAL "ARM" )
+    SET(CARCH_FILES  ${PROJECT_SOURCE_DIR}/src/arch/arm/longjmp.s 
+                     ${PROJECT_SOURCE_DIR}/src/arch/arm/setjmp.s)
+elseif ( ${CARCH} STREQUAL "i386" )
+    SET(CARCH_FILES  ${PROJECT_SOURCE_DIR}/src/arch/i386/longjmp.s 
+                     ${PROJECT_SOURCE_DIR}/src/arch/i386/setjmp.s)
+elseif ( ${CARCH} STREQUAL "x64" )
+    SET(CARCH_FILES  ${PROJECT_SOURCE_DIR}/src/arch/x86_64/longjmp.s 
+                     ${PROJECT_SOURCE_DIR}/src/arch/x86_64/setjmp.s)
+elseif ( ${CARCH} STREQUAL "aarch64" )
+    SET(CARCH_FILES  ${PROJECT_SOURCE_DIR}/src/arch/aarch64/longjmp.s 
+                     ${PROJECT_SOURCE_DIR}/src/arch/aarch64/setjmp.s)
+else()
+    SET(CARCH_FILES  ${PROJECT_SOURCE_DIR}/src/arch/user/port.c 
+                     ${PROJECT_SOURCE_DIR}/src/arch/user/longjmp.s 
+                     ${PROJECT_SOURCE_DIR}/src/arch/user/setjmp.s)
+ENDIF()
 
 add_library(${PROJ_NAME} STATIC  
-        src/adler32.c
-        src/crc.c
-        src/stdlib/bsearch.c
-        src/stdlib/sorts.c
-        src/stdlib/stdlib.c
-        src/stdlib/strtod.c
-        src/stdlib/strof.c
-        src/stdlib/strol.c
-        src/stdlib/stroll.c
-        src/stdlib/stroul.c
-        src/stdlib/stroull.c
-        src/sys/utsname.c
-        src/utils/atomic_counter.c
-        src/utils/atomic_spinlock.c
-        src/alignment.c
-        src/assert.c
-        src/complex.c
-        src/ctype.c
-        src/deque.c 
-        src/erno.c 
-        src/getop_long.c 
-        src/getop.c 
-        src/langinfo.c 
-        src/libgcc.c 
-        src/malloc.c 
-        src/math_exp.c 
-        src/math_misc.c 
-        src/math_pow.c 
-        src/math_trigo.c 
-        src/memclr.c 
-        src/node.c 
-        src/pair.c 
-        src/priority_deque.c
-        src/queue.c 
-        src/ringbuffer.c 
-        src/sleep.c 
-        src/sort.c 
-        src/sprintf.c 
-        src/sqrtf.c 
-        src/stdatomic.c 
-        src/stdio.c 
-        src/storage.c 
-        src/string.c 
-        src/tgmath.c 
-        src/timer.c 
-        src/wchar.c 
-        src/wctype.c
+${PROJECT_SOURCE_DIR}/src/hash/adler32.c
+${PROJECT_SOURCE_DIR}/src/hash/crc.c
+${PROJECT_SOURCE_DIR}/src/stdlib/bsearch.c
+${PROJECT_SOURCE_DIR}/src/stdlib/sorts.c
+${PROJECT_SOURCE_DIR}/src/stdlib/stdlib.c
+${PROJECT_SOURCE_DIR}/src/stdlib/strtod.c
+${PROJECT_SOURCE_DIR}/src/stdlib/strtof.c
+${PROJECT_SOURCE_DIR}/src/stdlib/strtol.c
+${PROJECT_SOURCE_DIR}/src/stdlib/strtoll.c
+${PROJECT_SOURCE_DIR}/src/stdlib/strtoul.c
+${PROJECT_SOURCE_DIR}/src/stdlib/strtoull.c
+${PROJECT_SOURCE_DIR}/src/sys/utsname.c
+${PROJECT_SOURCE_DIR}/src/utils/atomic_counter.c
+${PROJECT_SOURCE_DIR}/src/utils/atomic_spinlock.c
+${PROJECT_SOURCE_DIR}/src/alignment.c
+${PROJECT_SOURCE_DIR}/src/assert.c
+${PROJECT_SOURCE_DIR}/src/complex.c
+${PROJECT_SOURCE_DIR}/src/ctype.c
+${PROJECT_SOURCE_DIR}/src/deque.c 
+${PROJECT_SOURCE_DIR}/src/errno.c 
+${PROJECT_SOURCE_DIR}/src/getopt_long.c 
+${PROJECT_SOURCE_DIR}/src/getopt.c 
+${PROJECT_SOURCE_DIR}/src/langinfo.c 
+${PROJECT_SOURCE_DIR}/src/libgcc.c 
+${PROJECT_SOURCE_DIR}/src/malloc.c 
+${PROJECT_SOURCE_DIR}/src/math_exp.c 
+${PROJECT_SOURCE_DIR}/src/math_misc.c 
+${PROJECT_SOURCE_DIR}/src/math_pow.c 
+${PROJECT_SOURCE_DIR}/src/math_trigo.c 
+${PROJECT_SOURCE_DIR}/src/memclr.c 
+${PROJECT_SOURCE_DIR}/src/node.c 
+${PROJECT_SOURCE_DIR}/src/pair.c 
+${PROJECT_SOURCE_DIR}/src/priority_deque.c
+${PROJECT_SOURCE_DIR}/src/queue.c 
+${PROJECT_SOURCE_DIR}/src/ringbuffer.c 
+${PROJECT_SOURCE_DIR}/src/sleep.c 
+${PROJECT_SOURCE_DIR}/src/sort.c 
+${PROJECT_SOURCE_DIR}/src/sprintf.c 
+${PROJECT_SOURCE_DIR}/src/sqrtf.c 
+${PROJECT_SOURCE_DIR}/src/stdatomic.c 
+${PROJECT_SOURCE_DIR}/src/stdio.c 
+${PROJECT_SOURCE_DIR}/src/storage.c 
+${PROJECT_SOURCE_DIR}/src/string.c 
+${PROJECT_SOURCE_DIR}/src/tgmath.c 
+${PROJECT_SOURCE_DIR}/src/time.c 
+${PROJECT_SOURCE_DIR}/src/wchar.c 
+${PROJECT_SOURCE_DIR}/src/wctype.c
 
-        src/arch/${CARCH}/longjmp.s 
-        src/arch/${CARCH}/setjmp.s 
-        src/arch/${CARCH}/*.c
+${CARCH_FILES}
 )
 
 # Install
