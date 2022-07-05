@@ -15,8 +15,10 @@ SET(CMAKE_DEBUG_POSTFIX "d")
 
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -nostdlib  -ffreestanding -nostartfiles -nostdinc -nodefaultlibs  -fno-stack-protector  -Iinclude/libcos")
 
-
 include_directories( ${PROJECT_SOURCE_DIR}/include/libcos)
+
+# Configure ARCH
+SET(CARCH, ARM)
 
 add_library(${PROJ_NAME} STATIC  
         src/adler32.c
@@ -66,6 +68,9 @@ add_library(${PROJ_NAME} STATIC
         src/timer.c 
         src/wchar.c 
         src/wctype.c
+
+        src/arch/${CARCH}/longjmp.s 
+        src/arch/${CARCH}/setjmp.s 
 )
 
 # Install
