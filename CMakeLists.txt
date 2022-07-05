@@ -71,6 +71,7 @@ add_library(${PROJ_NAME} STATIC
 
         src/arch/${CARCH}/longjmp.s 
         src/arch/${CARCH}/setjmp.s 
+        src/arch/${CARCH}/*.c
 )
 
 # Install
