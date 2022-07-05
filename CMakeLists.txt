@@ -1,12 +1,11 @@
 cmake_minimum_required(VERSION 3.16)
-SET(PROJ_NAME "libcos")
-
-
-set( CMAKE_C_COMPILER "gcc" )
-
+SET(PROJ_NAME "cos")
+set(CMAKE_C_COMPILER "gcc" )
 set(CMAKE_C_STANDARD 99)
 
 PROJECT(${PROJ_NAME} LANGUAGES C)
+
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -nostdlib  -ffreestanding -nostartfiles -nostdinc -nodefaultlibs  -fno-stack-protector  -Iinclude/libcos")
 
 # Configuration types
 SET(CMAKE_CONFIGURATION_TYPES "Debug;Release" CACHE STRING "Configs" FORCE)
@@ -17,12 +16,10 @@ ENDIF()
 SET(${PROJ_NAME}_PATH_INSTALL "/opt/project" CACHE PATH "This directory contains installation Path")
 SET(CMAKE_DEBUG_POSTFIX "d")
 
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -nostdlib  -ffreestanding -nostartfiles -nostdinc -nodefaultlibs  -fno-stack-protector  -Iinclude/libcos")
-
 include_directories( ${PROJECT_SOURCE_DIR}/include/libcos)
 
 # Configure ARCH
-SET(CARCH "ARM:I386:x64:aarch64:user" CACHE STRING "Arch" FORCE)
+SET(CARCH "ARM:I386:x64:aarch64:user" CACHE STRING "The build Arch" FORCE)
 
 IF( ${CARCH} STREQUAL "ARM" )
     SET(CARCH_FILES  ${PROJECT_SOURCE_DIR}/src/arch/arm/longjmp.s 
