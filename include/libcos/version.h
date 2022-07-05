@@ -25,10 +25,10 @@
 #define KLIBCOS_VERSION_H
 
 #define KLIBCOS_VERSION_MAJOR       1
-#define KLIBCOS_VERSION_MINOR       1
-#define KLIBCOS_VERSION_PATCH       2
+#define KLIBCOS_VERSION_MINOR       2
+#define KLIBCOS_VERSION_PATCH       0
 
-#define KLIBCOS_VERSION_STRING      "1.1.2"
-#define KLIBCOS_VERSION             0x010102
+#define KLIBCOS_VERSION_STRING      "1.2.0"
+#define KLIBCOS_VERSION             0x010200
 
 #endif
