@@ -30,11 +30,11 @@
 #define CLOCKS_PER_SEC 1000000L
 #define TIME_UTC 1
 
+
+
 #ifdef __cplusplus
 extern "C" {
 #endif
-
-
 
 #define _STRUCT_TIMESPEC
 struct timespec {

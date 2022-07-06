@@ -58,6 +58,7 @@ typedef enum PORTTIMESEC {
     TIME_READ_ADDR_YEAR = 0x09,
 } port_time_sec_t;
 
+
 void            port_putchar(const char c);
 int             port_getchar();
 
@@ -67,7 +68,8 @@ void            port_free(void* addr);
 uint8_t         port_time_read(port_time_sec_t addr);
 
 void 			port_io_wait( void );
-clock_t 		port_clock();
+
+int             port_clock_gettime(long* tv_sec, int* tv_usec);
 
 void 			port_intr_enable();
 void 			port_intr_disable() ;
