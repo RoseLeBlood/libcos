@@ -124,7 +124,7 @@ size_t ringbuf_dequeue_ptr(ringbuf_t* rngb, uint8_t* readPtr, size_t offset, siz
 
     size_t _readed = 0;
 
-    for(; _readed < size); _readed++) { 
+    for(_readed = 0; _readed < size; _readed++) { 
         if(ringbuf_is_empty(rngb)) break; 
         readPtr[_readed] = ringbuf_dequeue(rngb); 
     }
@@ -132,10 +132,10 @@ size_t ringbuf_dequeue_ptr(ringbuf_t* rngb, uint8_t* readPtr, size_t offset, siz
     return _readed;
 }
 
-size_t      ringbuf_enqueue_ptr(ringbuf_t* rngb, uint8_t toWrite, size_t offset, size_t size) {
+size_t      ringbuf_enqueue_ptr(ringbuf_t* rngb, uint8_t* toWrite, size_t offset, size_t size) {
     size_t _written = 0;
 
-    for(; _written < (size - offset); _written++) {
+    for(_written = 0; _written < (size - offset); _written++) {
         if(ringbuf_enqueue(rngb, toWrite[_written + offset]) != 0)
             break;
     }
