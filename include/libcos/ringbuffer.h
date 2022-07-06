@@ -38,7 +38,7 @@ int         ringbuf_create_static(ringbuf_t* rngb, uint8_t* buffer, size_t size)
 int         ringbuf_enqueue(ringbuf_t* rngb, uint8_t data);
 uint8_t     ringbuf_dequeue(ringbuf_t* rngb);
 
-size_t      ringbuf_enqueue_ptr(ringbuf_t* rngb, uint8_t toWrite, size_t offset, size_t size);
+size_t      ringbuf_enqueue_ptr(ringbuf_t* rngb, uint8_t* toWrite, size_t offset, size_t size);
 size_t      ringbuf_dequeue_ptr(ringbuf_t* rngb, uint8_t* readPtr, size_t offset, size_t size);
 
 uint8_t     ringbuf_peek(ringbuf_t* rngb);

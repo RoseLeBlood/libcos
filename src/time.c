@@ -72,7 +72,7 @@ char* asctime(const struct tm *timeptr) {
 
 clock_t clock(void) {
 	struct timespec ts;
-	if(port_clock_gettime(&ts.tv_sec, &ts.tv_usec) != 0) return -1;
+	if(port_clock_gettime(&ts.tv_sec, &ts.tv_nsec) != 0) return -1;
 
 	if (ts.tv_sec > LONG_MAX / 1000000
 	 || ts.tv_nsec / 1000 > LONG_MAX-1000000 * ts.tv_sec)

@@ -69,7 +69,7 @@ uint8_t         port_time_read(port_time_sec_t addr);
 
 void 			port_io_wait( void );
 
-int             port_clock_gettime(long* tv_sec, int* tv_usec);
+int             port_clock_gettime(long* tv_sec, long* tv_usec);
 
 void 			port_intr_enable();
 void 			port_intr_disable() ;

@@ -54,7 +54,7 @@ void 			port_io_wait( void )  {
 
 }
 
-int             port_clock_gettime(long* tv_sec, int* tv_usec)  { 
+int             port_clock_gettime(long* tv_sec, long* tv_usec)  { 
    return 0;
 }
 
