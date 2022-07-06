@@ -24,6 +24,6 @@
 #ifndef KLIBC_TYPECONV_H
 #define KLIBC_TYPECONV_H
 
-unsigned char bcd2bin(unsigned char);
+#define bcd2bin(bcd) ((((bcd)&15) + ((bcd)>>4)*10))
 
 #endif

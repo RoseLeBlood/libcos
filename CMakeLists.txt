@@ -3,13 +3,12 @@ cmake_minimum_required(VERSION 3.16)
 set(CMAKE_C_COMPILER "gcc" )
 set(CMAKE_C_STANDARD 99)
 
-
 SET(CARCH "x64")
 
 
 
 PROJECT(${PROJ_NAME} LANGUAGES C)
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -nostdlib  -ffreestanding -nostartfiles -nostdinc -nodefaultlibs  -fno-stack-protector  -Iinclude/libcos")
+SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -nostdlib  -ffreestanding -nostartfiles -nostdinc -nodefaultlibs  -fno-stack-protector  -Iinclude/libcos")
 SET(CMAKE_DEBUG_POSTFIX "d")
 
 include_directories( ${PROJECT_SOURCE_DIR}/include/libcos  ${PROJECT_SOURCE_DIR}/include/)
@@ -19,23 +18,28 @@ IF( ${CARCH} STREQUAL "ARM" )
     SET(CARCH_FILES  ${PROJECT_SOURCE_DIR}/src/arch/arm/longjmp.s 
                      ${PROJECT_SOURCE_DIR}/src/arch/arm/setjmp.s)
                      SET(PROJ_NAME "cos_arm")
+                     SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -D LIBCOS_ARCH_ARM ")
 elseif ( ${CARCH} STREQUAL "i386" )
     SET(CARCH_FILES  ${PROJECT_SOURCE_DIR}/src/arch/i386/longjmp.s 
                      ${PROJECT_SOURCE_DIR}/src/arch/i386/setjmp.s)
                      SET(PROJ_NAME "cos_i386")
+                     SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -D LIBCOS_ARCH_I386 ")
 elseif ( ${CARCH} STREQUAL "x64" )
     SET(CARCH_FILES  ${PROJECT_SOURCE_DIR}/src/arch/x86_64/longjmp.s 
                      ${PROJECT_SOURCE_DIR}/src/arch/x86_64/setjmp.s)
                      SET(PROJ_NAME "cos_x64")
+                     SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -D LIBCOS_ARCH_X64 ")
 elseif ( ${CARCH} STREQUAL "aarch64" )
     SET(CARCH_FILES  ${PROJECT_SOURCE_DIR}/src/arch/aarch64/longjmp.s 
                      ${PROJECT_SOURCE_DIR}/src/arch/aarch64/setjmp.s)
                      SET(PROJ_NAME "cos_aarch64")
+                     SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -D LIBCOS_ARCH_AARCH64 ")
 else()
     SET(CARCH_FILES  ${PROJECT_SOURCE_DIR}/src/arch/user/port.c 
                      ${PROJECT_SOURCE_DIR}/src/arch/user/longjmp.s 
                      ${PROJECT_SOURCE_DIR}/src/arch/user/setjmp.s)
                      SET(PROJ_NAME "cos_user")
+                     SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -D LIBCOS_ARCH_USER ")
 ENDIF()
 
 add_library(${PROJ_NAME} STATIC  
@@ -69,6 +73,7 @@ ${PROJECT_SOURCE_DIR}/src/math_misc.c
 ${PROJECT_SOURCE_DIR}/src/math_pow.c 
 ${PROJECT_SOURCE_DIR}/src/math_trigo.c 
 ${PROJECT_SOURCE_DIR}/src/memclr.c 
+${PROJECT_SOURCE_DIR}/src/mutex.c
 ${PROJECT_SOURCE_DIR}/src/node.c 
 ${PROJECT_SOURCE_DIR}/src/pair.c 
 ${PROJECT_SOURCE_DIR}/src/priority_deque.c
