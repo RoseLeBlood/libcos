@@ -67,7 +67,7 @@ void            port_free(void* addr);
 uint8_t         port_time_read(port_time_sec_t addr);
 
 void 			port_io_wait( void );
-void 			port_iodelay(int count);
+clock_t 		port_clock();
 
 void 			port_intr_enable();
 void 			port_intr_disable() ;

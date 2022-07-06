@@ -25,13 +25,11 @@
 #include "types.h"
 #include "private/port.h"
 
-void udelay(uint32_t usec)
-{
-	port_iodelay(usec);
+void udelay(uint32_t usec) {
+        mdelay(usec / 1000);
 }
-void mdelay (unsigned msec)
-{
-        while (msec-- > 0) {
-                udelay (1000);
-        }
+void mdelay (unsigned msec) {
+        clock_t start_time = clock();
+
+	while (clock() < start_time + msec) ;
 }

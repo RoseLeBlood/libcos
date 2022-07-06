@@ -31,7 +31,7 @@ extern "C" {
 #endif
 
 void udelay(uint32_t usec);
-void mdelay (unsigned msec);
+void mdelay (unsigned long ms);
 
 #define delay(sec)  mdelay((sec)*1000)
 

@@ -24,7 +24,7 @@
 */
 #include "private/port.h"
 
-#ifdef LIBCOS_ARCH_USER 
+#ifdef LIBCOS_ARCH_I386 
 
 // ----------------- malloc.h
 void* port_malloc(size_t size) {
@@ -51,20 +51,20 @@ int port_getchar() {
 }
 
 void 			port_io_wait( void )  {
-
+    asm("pause");
 }
 
-clock_t 		port_clock()  { 
- 
+clock_t 		port_clock() { 
+    
 }
 
 
 void 			port_intr_enable()  {
-
+    asm volatile ("sti" : : : "memory")
 }
 
 void 			port_intr_disable()   {
-
+    asm volatile ("cli" : : : "memory")
 }
 
 void 			port_halt()  {
@@ -72,7 +72,11 @@ void 			port_halt()  {
 }
 
 void* port_get_curr_stack_pointer() {
-    return NULL;
+    int *_esp;
+    asm volatile ("movl %esp, _esp");
+
+    return _esp;
 }
+
 
 #endif
