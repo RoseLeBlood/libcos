@@ -24,21 +24,22 @@
 #include <time.h>
 #include <types.h>
 #include <stdio.h>
+#include "typeconv.h"
 
 #include "private/port.h"
 
-#define BCD2BIN(bcd) ((((bcd)&15) + ((bcd)>>4)*10))
+
 
 struct tm *localtime(const time_t *timer)
 {
 	static struct tm time;
 	
-	time.tm_sec = BCD2BIN(port_time_read(0x00));
-    time.tm_min = BCD2BIN(port_time_read(0x02));
-    time.tm_hour = BCD2BIN(port_time_read(0x04));
-    time.tm_mday = BCD2BIN(port_time_read(0x07));
-    time.tm_mon = BCD2BIN(port_time_read(0x08));
-    time.tm_year = BCD2BIN(port_time_read(0x09));
+	time.tm_sec = bcd2bin(port_time_read(0x00));
+    time.tm_min = bcd2bin(port_time_read(0x02));
+    time.tm_hour = bcd2bin(port_time_read(0x04));
+    time.tm_mday = bcd2bin(port_time_read(0x07));
+    time.tm_mon = bcd2bin(port_time_read(0x08));
+    time.tm_year = bcd2bin(port_time_read(0x09));
         
     return &time;
 }
@@ -68,3 +69,7 @@ char* asctime(const struct tm *timeptr) {
 	return asctime_r(timeptr, buf);
 }
 
+
+clock_t clock(void) { 
+	return port_clock(); 
+}

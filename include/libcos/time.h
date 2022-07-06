@@ -26,6 +26,7 @@
 
 #include <types.h>
 
+
 #define CLOCKS_PER_SEC 1000000L
 #define TIME_UTC 1
 
@@ -55,6 +56,8 @@ struct tm
 
 struct tm *localtime ( const time_t * timer);
 char*      asctime(const struct tm *timeptr);
+
+clock_t 	clock(void);
 
 #ifdef __cplusplus
 };
