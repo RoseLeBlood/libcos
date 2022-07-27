@@ -81,15 +81,15 @@ int uuid4_is_nil(const uuid_t uuid) {
 void uuid4_clear(uuid_t uuid) {
     ZeroMemory(uuid, 16);
 }
-const char* uuid4_string_upper(char* buffer, uuid_t uuid)  {
+string_t uuid4_string_upper(char* buffer, uuid_t uuid)  {
     return uuid4_string(buffer, uuid, 1);
 }
 
-const char* uuid4_string_lower(char* buffer, uuid_t uuid) {
+string_t uuid4_string_lower(char* buffer, uuid_t uuid) {
     return uuid4_string(buffer, uuid, 0);
 }
 
-const char* uuid4_string(char* buffer, uuid_t uuid, uint8_t upper) {
+string_t uuid4_string(char* buffer, uuid_t uuid, uint8_t upper) {
 
     const uint8_t	*ptr = uuid;
 

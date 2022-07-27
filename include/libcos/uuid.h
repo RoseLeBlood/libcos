@@ -40,9 +40,9 @@ uint8_t* uuid4_generate(uuid_t uuid, uint32_t seed);
 int      uuid4_is_nil(const uuid_t uuid);;
 void     uuid4_clear(uuid_t uuid);
 
-const char* uuid4_string(char* buffer, uuid_t uuid, uint8_t upper);
-const char* uuid4_string_upper(char* buffer, uuid_t uuid);
-const char* uuid4_string_lower(char* buffer, uuid_t uuid);
+string_t uuid4_string(char* buffer, uuid_t uuid, uint8_t upper);
+string_t uuid4_string_upper(char* buffer, uuid_t uuid);
+string_t uuid4_string_lower(char* buffer, uuid_t uuid);
 
 #ifdef __cplusplus
 }
