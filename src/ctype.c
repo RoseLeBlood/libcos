@@ -91,3 +91,24 @@ int ispoint (int c) {
 int isexponent(int c) {
     return (c == 'e' || c == 'E') ;
 }
+
+typedef union _priv_convert {
+    unsigned long long l;
+    double d;
+} _priv_convert_t;
+
+int isnan(double d) {
+    _priv_convert_t _conv;
+    _conv.d = d;
+
+    return (_conv.l == 0x7FF8000000000000ll || 
+            _conv.l == 0x7FF0000000000000ll || 
+            _conv.l == 0xfff8000000000000ll);
+}
+int isinf(double d) {
+    _priv_convert_t _conv;
+    _conv.d = d;
+
+    return (_conv.l == 0x7FF0000000000000ll ? 1 : 
+            _conv.l == 0xFFF0000000000000ll ? -1 : 0);
+}

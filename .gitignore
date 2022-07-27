@@ -54,4 +54,5 @@ dkms.conf
 .pio
 
 platformio.ini
-_build/*
+_build/
+build/

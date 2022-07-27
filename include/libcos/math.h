@@ -54,8 +54,6 @@ extern "C"
 {
 #endif
 
-
-
 double                  acos(double x);
 float                   acosf(float x);
 long double             acosl(long double x);
@@ -225,10 +223,6 @@ float                   fmaf(float x, float y, float z);
 long double             fmal(long double x, long double y, long double z);
 
 
-void paddb(uint8_t DST[16], const uint8_t v2[16]);
-void paddw(uint16_t DST[8], const uint16_t v2[8]);
-void paddd(uint32_t DST[4], const uint32_t v2[4]);
-void paddq(uint64_t DST[2], const uint64_t v2[2]);
 
 
 #ifdef __cplusplus

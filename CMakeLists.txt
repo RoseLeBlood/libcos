@@ -38,13 +38,13 @@ else()
     SET(CARCH_FILES  ${PROJECT_SOURCE_DIR}/src/arch/user/port.c 
                      ${PROJECT_SOURCE_DIR}/src/arch/user/longjmp.s 
                      ${PROJECT_SOURCE_DIR}/src/arch/user/setjmp.s)
-                     SET(PROJ_NAME "cos_user")
+                     SET(PROJ_NAME "cos_sh")
                      SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -D LIBCOS_ARCH_USER ")
 ENDIF()
 
 add_library(${PROJ_NAME} STATIC  
-${PROJECT_SOURCE_DIR}/src/hash/adler32.c
-${PROJECT_SOURCE_DIR}/src/hash/crc.c
+${PROJECT_SOURCE_DIR}/src/hash/crypt/adler32.c
+${PROJECT_SOURCE_DIR}/src/hash/crypt/crc.c
 ${PROJECT_SOURCE_DIR}/src/stdlib/bsearch.c
 ${PROJECT_SOURCE_DIR}/src/stdlib/sorts.c
 ${PROJECT_SOURCE_DIR}/src/stdlib/stdlib.c
@@ -89,6 +89,7 @@ ${PROJECT_SOURCE_DIR}/src/storage.c
 ${PROJECT_SOURCE_DIR}/src/string.c 
 ${PROJECT_SOURCE_DIR}/src/tgmath.c 
 ${PROJECT_SOURCE_DIR}/src/time.c 
+${PROJECT_SOURCE_DIR}/src/uuid.c 
 ${PROJECT_SOURCE_DIR}/src/wchar.c 
 ${PROJECT_SOURCE_DIR}/src/wctype.c
 
