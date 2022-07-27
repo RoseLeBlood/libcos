@@ -52,7 +52,8 @@ unsigned long long int  		        strtoull        (const char* nptr, char** endp
    
 int                                     rand  ();
 void                                    srand (unsigned int seed);
-int										rand_m(unsigned int min, unsigned int max);
+int										rand_m(int32_t min, int32_t max);
+int8_t*                                 rand_bytes(int8_t* buf, size_t size);
 
 
 void*                                   bsearch_s (const void* key, const void* base, size_t nitems, size_t size, cmpfunc_t compar, void* args);
