@@ -43,8 +43,8 @@ else()
 ENDIF()
 
 add_library(${PROJ_NAME} STATIC  
-${PROJECT_SOURCE_DIR}/src/hash/crypt/adler32.c
-${PROJECT_SOURCE_DIR}/src/hash/crypt/crc.c
+${PROJECT_SOURCE_DIR}/src/crypt/adler32.c
+${PROJECT_SOURCE_DIR}/src/crypt/crc.c
 ${PROJECT_SOURCE_DIR}/src/stdlib/bsearch.c
 ${PROJECT_SOURCE_DIR}/src/stdlib/sorts.c
 ${PROJECT_SOURCE_DIR}/src/stdlib/stdlib.c
