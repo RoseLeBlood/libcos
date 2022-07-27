@@ -214,11 +214,11 @@ int rand() {
 int rand_m(int32_t min, int32_t max) {
 	return min + rand() % ( max - min + 1 );
 }
-int8_t* rand_bytes(int8_t* buf, size_t size) {
+uint8_t* rand_bytes(uint8_t* buf, size_t size) {
 	int i = 0;
-	
+
 	while(i < size) {
-		buf[i] = (int8_t)rand_m(-127, 127);
+		buf[i] = (int8_t)rand_m(0, 255);
 		i++;
 	}
 
