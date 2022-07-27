@@ -24,7 +24,7 @@
 #ifndef KLIBCOS_UUID_H
 #define KLIBCOS_UUID_H
 
-#include "ctype.h"
+#include "types.h"
 
 #define UUID_SIZE  16
 
@@ -36,8 +36,13 @@ typedef uint8_t uuid_t[16];
 
 static const uuid_t UUID_NIL = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
 
-uint8_t* uuid_generate(uuid_t out);
-int      uuid_is_nil(const uuid_t uu);;
+uint8_t* uuid4_generate(uuid_t uuid, uint32_t seed);
+int      uuid4_is_nil(const uuid_t uuid);;
+void     uuid4_clear(uuid_t uuid);
+
+const char* uuid4_string(char* buffer, uuid_t uuid, uint8_t upper);
+const char* uuid4_string_upper(char* buffer, uuid_t uuid);
+const char* uuid4_string_lower(char* buffer, uuid_t uuid);
 
 #ifdef __cplusplus
 }
