@@ -73,6 +73,7 @@ typedef unsigned char       UCHAR;  //  8 Bit
 typedef unsigned short      USHORT; // 16 Bit
 typedef unsigned long       UINT;   // 32 Bit
 
+typedef const char*         string_t;
 #ifdef __cplusplus
 }
 #endif
