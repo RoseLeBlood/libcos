@@ -26,109 +26,123 @@
 #include "string.h"
 #include "stdio.h"
 
-uint8_t* uuid4_generate(uuid_t uuid, uint32_t seed) {
-    uuid_t   buf;
-    uint32_t tmp;
-    uint32_t first;
-    uint16_t sec;
-    uint16_t ver;
-    uint16_t clock;
-    uint8_t node[6];
+
+
+void uuid4_from_raw(const int8_t uuid[UUID_SIZE], uuid_t* out) {
+    uint32_t		tmp;
+    const uint8_t *ptr = uuid;
+
+    tmp = *ptr++;
+	tmp = (tmp << 8) | *ptr++;
+	tmp = (tmp << 8) | *ptr++;
+	tmp = (tmp << 8) | *ptr++;
+	out->time_low = tmp;
+
+	tmp = *ptr++;
+	tmp = (tmp << 8) | *ptr++;
+	out->time_mid = tmp;
+
+	tmp = *ptr++;
+	tmp = (tmp << 8) | *ptr++;
+	out->time_hi_and_version = tmp;
+
+	tmp = *ptr++;
+	tmp = (tmp << 8) | *ptr++;
+	out->clock_seq = tmp;
+
+	memcpy(out->node, ptr, 6);
+	memcpy(out->raw_uuid, uuid, UUID_SIZE);
+    
+}
+
+void uuid4_to_raw(uuid_t* uu, uint8_t ptr[UUID_SIZE]) {
+    uint32_t	tmp;
+	unsigned char	*out = ptr;
+
+	tmp = uu->time_low;
+	out[3] = (unsigned char) tmp; tmp >>= 8;
+	out[2] = (unsigned char) tmp; tmp >>= 8;
+	out[1] = (unsigned char) tmp; tmp >>= 8;
+	out[0] = (unsigned char) tmp;
+
+	out[5] = (unsigned char) uu->time_mid;
+	out[4] = (unsigned char) uu->time_mid >> 8;
+	
+	out[7] = (unsigned char) uu->time_hi_and_version;
+	out[6] = (unsigned char) uu->time_hi_and_version >> 8;
+
+	out[9] = (unsigned char) uu->clock_seq;
+	out[8] = (unsigned char) uu->clock_seq >> 8;
+
+	memcpy(out+10, uu->node, 6);
+}
+
+
+void  uuid4_generate(uuid_t* uuid, uint32_t seed) {
+    uint8_t   buf[16];
 
     srand(seed);
     const int8_t* pbuf = rand_chars(buf, 16);
 
-    tmp = *pbuf++;
-    tmp = (tmp << 8) | *pbuf++;
-    tmp = (tmp << 8) | *pbuf++;
-    first = (tmp << 8) | *pbuf++;
+    uuid4_from_raw(pbuf, uuid);
 
-    sec = *pbuf++; tmp = (tmp << 8) | *pbuf++;
-    ver = *pbuf++; tmp = (tmp << 8) | *pbuf++;
-    clock = *pbuf++; tmp = (tmp << 8) | *pbuf++;
-    memcpy(node, pbuf, 6);
+    uuid->clock_seq = (uuid->clock_seq & 0x3FFF) | 0x8000;
+    uuid->time_hi_and_version = (uuid->time_hi_and_version & 0x0FFF) | 0x4000;
 
-    clock = (clock & 0x3FFF) | 0x8000;
-    ver = (ver & 0x0FFF) | 0x4000;
+    uuid4_to_raw(uuid, uuid->raw_uuid);
+}
 
-    uuid[3] = (uint8_t) first; first >>= 8;
-    uuid[2] = (uint8_t) first; first >>= 8;
-    uuid[1] = (uint8_t) first; first >>= 8;
-    uuid[0] = (uint8_t) first;
-    uuid[5] = (uint8_t) sec; sec >>= 8;
-    uuid[4] = (uint8_t) sec;
-    uuid[7] = (uint8_t) ver; ver >>= 8;
-    uuid[6] = (uint8_t) ver;
-    uuid[9] = (uint8_t) clock; clock >>= 8;
-    uuid[8] = (uint8_t) clock;
-    memcpy(uuid + 10, node, 6);
+void  uuid4_nil(uuid_t* nil) {
+    nil->time_low = 0;
+    nil->time_mid = 0;
+    nil->time_hi_and_version = 0;
+    nil->clock_seq = 0;
+    nil->node[0] =  0;
+    nil->node[1] =  0;
+    nil->node[2] =  0;
+    nil->node[3] =  0;
+    nil->node[4] =  0;
+    nil->node[5] =  0;
+    
+    for(char i = 0; i < UUID_SIZE; i++)
+        nil->raw_uuid[i] = 0;
+}
 
-    uuid += 16;
-
-    return uuid;
+void     uuid4_clear(uuid_t* uuid) {
+    uuid4_nil(uuid);
 }
 
 int uuid4_is_nil(const uuid_t uuid) {
     int ret = 0;
 
     for(char i = 0; i < UUID_SIZE; i++ ) {
-        if(uuid[i] != 0) { ret = -1; break; }
+        if(uuid.raw_uuid[i] != 0) { ret = -1; break; }
     }
 
     return ret;
 }
 
-void uuid4_clear(uuid_t uuid) {
-    ZeroMemory(uuid, 16);
-}
-string_t uuid4_string_upper(char* buffer, uuid_t uuid)  {
-    return uuid4_string(buffer, uuid, 1);
-}
 
-string_t uuid4_string_lower(char* buffer, uuid_t uuid) {
-    return uuid4_string(buffer, uuid, 0);
-}
 
 string_t uuid4_string(char* buffer, uuid_t uuid, uint8_t upper) {
-
-    const uint8_t	*ptr = uuid;
-
-    uint32_t first;
-    uint16_t sec;
-    uint16_t ver;
-    uint16_t clock;
-    uint8_t node[6];
-
     char* fmt ;
-
-    uint32_t tmp = *ptr++;
-	tmp = (tmp << 8) | *ptr++;
-	tmp = (tmp << 8) | *ptr++;
-	tmp = (tmp << 8) | *ptr++;
-	first = tmp;
-
-	tmp = *ptr++;
-	tmp = (tmp << 8) | *ptr++;
-	sec = tmp;
-
-	tmp = *ptr++;
-	tmp = (tmp << 8) | *ptr++;
-	ver = tmp;
-
-	tmp = *ptr++;
-	tmp = (tmp << 8) | *ptr++;
-	clock = tmp;
-
-	memcpy(node, ptr, 6);
-    
     
     if(upper) {
-        fmt = "%08X-%04X-%04X-%02X%02X-%02X%02X%02X%02X%02X%02X";
+        fmt = "%08X-%04X-%02X%02X-%02X%02X-%02X%02X%02X%02X%02X%02X";
     }  else {
-        fmt = "%08x-%04x-%04x-%02x%02x-%02x%02x%02x%02x%02x%02x";
+        fmt = "%08x-%04x-%02x%02x-%02x%02x-%02x%02x%02x%02x%02x%02x";
     }
-    sprintf(buffer, fmt, first, sec, ver, clock >> 8, clock & 0xFF,
-		node[0], node[1], node[2], node[3], node[4], node[5]);
+    sprintf(buffer, fmt, uuid.time_low, 
+                         uuid.time_mid, 
+                         uuid.version, uuid.time_hi,
+                         uuid.clock_seq_low, uuid.clock_seq_high ,
+                         uuid.node[0],
+                         uuid.node[1],
+                         uuid.node[2],
+                         uuid.node[3],
+                         uuid.node[4],
+                         uuid.node[5]
+            );
 		
     return buffer;
 }
