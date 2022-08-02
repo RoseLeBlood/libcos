@@ -55,6 +55,7 @@ ${PROJECT_SOURCE_DIR}/src/stdlib/strtoll.c
 ${PROJECT_SOURCE_DIR}/src/stdlib/strtoul.c
 ${PROJECT_SOURCE_DIR}/src/stdlib/strtoull.c
 ${PROJECT_SOURCE_DIR}/src/sys/utsname.c
+${PROJECT_SOURCE_DIR}/src/sys/dirent.c
 ${PROJECT_SOURCE_DIR}/src/utils/atomic_counter.c
 ${PROJECT_SOURCE_DIR}/src/utils/atomic_spinlock.c
 ${PROJECT_SOURCE_DIR}/src/alignment.c
@@ -92,6 +93,7 @@ ${PROJECT_SOURCE_DIR}/src/time.c
 ${PROJECT_SOURCE_DIR}/src/uuid.c 
 ${PROJECT_SOURCE_DIR}/src/wchar.c 
 ${PROJECT_SOURCE_DIR}/src/wctype.c
+
 
 ${CARCH_FILES}
 )
