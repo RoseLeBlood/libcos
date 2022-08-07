@@ -21,29 +21,30 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */
-#ifndef KLIBCOS_NODE_H
-#define KLIBCOS_NODE_H
+#ifndef KLIBCOS_LISTEASY_H
+#define KLIBCOS_LISTEASY_H
 
-#include <types.h>
+#include "node.h"
 
 #ifdef __cplusplus
 extern "C" {
 #endif 
 
-typedef struct node {
-    void* value;
-    size_t size;
-    struct node* next;
-    struct node* prev;
-} node_t;
+typedef struct list_t list_t;
 
-typedef struct prio_node {
-    void* value;
-    size_t size;
-    int32_t priority;
-    struct prio_node* next;
-    struct prio_node* prev;
-} prio_node_t;
+typedef int (* list_callback)(node_t*);
+
+void        list_create(list_t* list);
+node_t*     list_add(list_t* list, void* value, size_t size);
+int         list_find(list_t* list, void* value, node_t** pOut);
+int         list_delete_entry(list_t* list, node_t* entry);
+void        list_travers(list_t* list, list_callback callback);
+void*       list_get(node_t* entry);
+void        list_clear(list_t* list);
+
+node_t*     list_get_head(list_t* list);
+node_t*     list_get_end(list_t* list);
+size_t      list_get_size(list_t* list);
 
 #ifdef __cplusplus
 }

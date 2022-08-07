@@ -68,6 +68,7 @@ ${PROJECT_SOURCE_DIR}/src/getopt_long.c
 ${PROJECT_SOURCE_DIR}/src/getopt.c 
 ${PROJECT_SOURCE_DIR}/src/langinfo.c 
 ${PROJECT_SOURCE_DIR}/src/libgcc.c 
+${PROJECT_SOURCE_DIR}/src/list.c
 ${PROJECT_SOURCE_DIR}/src/malloc.c 
 ${PROJECT_SOURCE_DIR}/src/math_exp.c 
 ${PROJECT_SOURCE_DIR}/src/math_misc.c 

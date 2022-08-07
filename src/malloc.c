@@ -34,7 +34,7 @@ extern void port_free(void* addr);
 void *calloc(size_t num, size_t size)
 {
         size_t x;
-        char *adr = (char *) port_malloc(size);
+        char *adr = (char *) malloc(size);
         char *j = adr;
 
         for(x = 0; x < size; x++)

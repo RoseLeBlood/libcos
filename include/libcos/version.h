@@ -26,9 +26,9 @@
 
 #define KLIBCOS_VERSION_MAJOR       1
 #define KLIBCOS_VERSION_MINOR       5
-#define KLIBCOS_VERSION_PATCH       0
+#define KLIBCOS_VERSION_PATCH       2
 
-#define KLIBCOS_VERSION_STRING      "1.5.0"
-#define KLIBCOS_VERSION             0x010500
+#define KLIBCOS_VERSION_STRING      "1.5.2"
+#define KLIBCOS_VERSION             0x010502
 
 #endif
