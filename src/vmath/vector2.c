@@ -60,20 +60,20 @@ void      vec2_mul(vec2_t* x, const vec2_t a, const vec2_t b) {
 void      vec2_add_f(vec2_t* x, const vec2_t a, const float b) {
     if(x == NULL) return;
 
-    x->x = a.x * b;
-    x->y = a.y * b;
+    x->x = a.x + b;
+    x->y = a.y + b;
 }
 void      vec2_sub_f(vec2_t* x, const vec2_t a, const float b) {
     if(x == NULL) return;
 
-    x->x = a.x * b;
-    x->y = a.y * b;
+    x->x = a.x - b;
+    x->y = a.y - b;
 }
 void      vec2_div_f(vec2_t* x, const vec2_t a, const float b) {
     if(x == NULL) return;
 
-    x->x = a.x * b;
-    x->y = a.y * b;
+    x->x = a.x / b;
+    x->y = a.y / b;
 }
 void      vec2_mul_f(vec2_t* x, const vec2_t a, const float b) {
     if(x == NULL) return;
@@ -107,6 +107,12 @@ int         vec2_less(const vec2_t a, const vec2_t b) {
 int         vec2_greater(const vec2_t a, const vec2_t b) {
     return ((a.x > b.x) && (a.y > b.y)) ? 0 : -1;
 }
+int         vec2_less_equel(const vec2_t a, const vec2_t b) {
+    return ((a.x <= b.x) && (a.y <= b.y)) ? 0 : -1;
+}
+int         vec2_greater_equel(const vec2_t a, const vec2_t b) {
+    return ((a.x => b.x) && (a.y => b.y)) ? 0 : -1;
+}
 
 float       vec2_lenght_sq(const vec2_t v) {
     return sqrtf(v.x * v.x + v.y * v.y ); 
@@ -128,7 +134,7 @@ float       vec2_normalize_ex(const vec2_t v) {
     float _vs = vec2_lenght_sq(v);
     *x = vec2_div_f(&v, v, (sqrtf(_vs) + 0.0001f) );
 }
-float       vec2_dot(const vec2_t a, const vec2_t b) {
+float       vec2_dot(const vec2_t v1, const vec2_t v2) {
     return (v1.x * v2.x + v1.y * v2.y);
 }
 float       vec2_angle(const vec2_t v1, const vec2_t v2) {
