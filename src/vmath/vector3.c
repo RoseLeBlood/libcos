@@ -48,7 +48,7 @@ void      vec3_sub(vec3_t* x, const vec3_t a, const vec3_t b) {
     x->y = a.y - b.y;
     x->z = a.z - b.z;
 }
-void      vec3_div(vec3_t* x, const vec3_t a, const vec3_t b); {
+void      vec3_div(vec3_t* x, const vec3_t a, const vec3_t b) {
     if(x == NULL) return;
 
     x->x = a.x / b.x;
@@ -137,11 +137,11 @@ void       vec3_normalize(vec3_t* x, const vec3_t v) {
     if(x == NULL) return;
 
     float _vs = vec3_lenght_sq(v);
-    *x = vec3_div_f(&v, v, sqrtf(_vs) );
+    vec3_div_f(x, v, sqrtf(_vs) );
 }
-float       vec3_normalize_ex(const vec3_t v) {
+void       vec3_normalize_ex(vec3_t* x, const vec3_t v) {
     float _vs = vec3_lenght_sq(v);
-    *x = vec3_div_f(&v, v, (sqrtf(_vs) + 0.0001f) );
+    vec3_div_f(x, v, (sqrtf(_vs) + 0.0001f) );
 }
 float       vec3_dot(const vec3_t v1, const vec3_t v2) {
     return (v1.x * v2.x + v1.y * v2.y + v1.z * v2.z);

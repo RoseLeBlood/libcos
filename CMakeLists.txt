@@ -94,6 +94,9 @@ ${PROJECT_SOURCE_DIR}/src/uuid.c
 ${PROJECT_SOURCE_DIR}/src/wchar.c 
 ${PROJECT_SOURCE_DIR}/src/wctype.c
 
+${PROJECT_SOURCE_DIR}/src/vmath/vector2.c
+${PROJECT_SOURCE_DIR}/src/vmath/vector3.c
+${PROJECT_SOURCE_DIR}/src/vmath/vector4.c
 
 ${CARCH_FILES}
 )
