@@ -21,15 +21,36 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */
-#ifndef KLIBCOS__SIZE_H
-#define KLIBCOS__SIZE_H
+#ifndef __KLIBCOS_ARRAY_H__
+#define __KLIBCOS_ARRAY_H__
 
-#ifndef __CHAR_BIT__
-# define __CHAR_BIT__                   8
+#include <stddef.h>
+#include "types.h"
+#include "assert.h"
+
+#ifdef	__cplusplus
+extern "C" {
 #endif
 
-#ifndef __SIZEOF_SHORT__
-# define __SIZEOF_SHORT__               sizeof(short)
+typedef struct array_t array_t;
+
+int array_create(array_t* a, size_t size);
+int array_add(array_t* a, void* pdata, size_t size);
+int array_set_at(array_t* a, size_t index, void* pdata, size_t size);
+int array_remove(array_t* a, size_t index);
+
+size_t array_index_of_ex(array_t* a, const void* data, size_t istart, size_t num_elements);
+size_t array_index_of(array_t* a, const void* data);
+
+size_t array_last_index_of_ex(array_t* a, const void* data, size_t iend, size_t num_elements);
+size_t array_last_index_of(array_t* a, const void* data);
+
+int array_set_size(array_t* a, size_t new_size);
+
+size_t array_nelements(array_t* a);
+
+#ifdef	__cplusplus
+}
 #endif
 
 #endif

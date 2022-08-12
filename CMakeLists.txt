@@ -58,6 +58,7 @@ ${PROJECT_SOURCE_DIR}/src/sys/utsname.c
 ${PROJECT_SOURCE_DIR}/src/sys/dirent.c
 ${PROJECT_SOURCE_DIR}/src/utils/atomic_counter.c
 ${PROJECT_SOURCE_DIR}/src/utils/atomic_spinlock.c
+${PROJECT_SOURCE_DIR}/src/array.c
 ${PROJECT_SOURCE_DIR}/src/alignment.c
 ${PROJECT_SOURCE_DIR}/src/assert.c
 ${PROJECT_SOURCE_DIR}/src/complex.c
