@@ -31,7 +31,12 @@ void        vec2_set(vec2_t* v, float x, float y) {
     v->x = x;
     v->y = y;
 }
-
+void        vec2_copy(vec2_t* dest, const vec2_t src) {
+    if(!dest) return;
+   
+	dest->x = src.x;
+    dest->y = src.y;
+}
 void      vec2_add(vec2_t* x, const vec2_t a, const vec2_t b) {
     if(x == NULL) return;
 

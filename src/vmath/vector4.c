@@ -33,7 +33,14 @@ void        vec4_set(vec4_t* v, float x, float y, float z, float w) {
     v->z = z;
     v->w = w;
 }
-
+void        vec4_copy(vec4_t* dest, const vec4_t src) {
+    if(!dest) return;
+   
+	dest->x = src.x;
+    dest->y = src.y;
+    dest->z = src.z;
+    dest->w = src.w;
+}
 void      vec4_add(vec4_t* x, const vec4_t a, const vec4_t b) {
     if(x == NULL) return;
 

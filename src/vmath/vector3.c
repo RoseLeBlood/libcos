@@ -34,6 +34,14 @@ void        vec3_set(vec3_t* v, float x, float y, float z) {
     v->z = z;
 }
 
+void        vec3_copy(vec3_t* dest, const vec3_t src) {
+    if(!dest) return;
+   
+	dest->x = src.x;
+    dest->y = src.y;
+    dest->z = src.z;
+}
+
 void      vec3_add(vec3_t* x, const vec3_t a, const vec3_t b) {
     if(x == NULL) return;
 
