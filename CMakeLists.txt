@@ -98,6 +98,7 @@ ${PROJECT_SOURCE_DIR}/src/wctype.c
 ${PROJECT_SOURCE_DIR}/src/vmath/vector2.c
 ${PROJECT_SOURCE_DIR}/src/vmath/vector3.c
 ${PROJECT_SOURCE_DIR}/src/vmath/vector4.c
+${PROJECT_SOURCE_DIR}/src/vmath/quaternion.c
 
 ${CARCH_FILES}
 )
