@@ -354,3 +354,17 @@ float remainderf(float x, float y) {
 
 	return res;
 }
+
+float factf(float p) {
+	if ( p == 0.0f || p == 1.0f ) return 1.0f;
+	else if ( p < 0.0f ) return 0.0f;
+
+	register float f = 1.0f ;
+
+	while( p > 1.0f ) {
+		f *= p ;
+		p-- ;
+	}
+
+	return f;
+}
